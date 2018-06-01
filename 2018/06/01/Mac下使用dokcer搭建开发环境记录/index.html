@@ -24,7 +24,7 @@
 <meta property="og:description" content="搭建环境中一些知识点的记录，帮助自己回忆一些遇到的问题">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/docker-inspect.png">
-<meta property="og:updated_time" content="2018-06-01T03:59:46.025Z">
+<meta property="og:updated_time" content="2018-06-01T04:02:28.246Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac下使用dokcer搭建开发环境记录">
 <meta name="twitter:description" content="搭建环境中一些知识点的记录，帮助自己回忆一些遇到的问题">
@@ -311,7 +311,7 @@
 <h3 id="build自己的image"><a href="#build自己的image" class="headerlink" title="build自己的image"></a>build自己的image</h3><p>制作这个一键式脚本最花费时间的地方是，想要重新build一个image，默认包含nginx的配置。不同域名对应不同的项目，一个docker通过nginx配置同时支持多个项目。当然配置域名后要在本地修改hosts文件才能正常访问。制作image就需要写一个Dockerfile，目的就是copy一些<code>nginx_xxx.conf</code>的配置文件进去，其他的信息不用修改。在这里学到了两个知识点：</p>
 <ul>
 <li>使用<code>doker inspect [image_id]</code>可以查看某个镜像的当前设置，包含<code>CMD</code> <code>Volumes</code> <code>EXPOSE</code>等，如下图</li>
-<li>在基于原来的image制作新的时，只需要设置需要修改的部分即可，不需要每个Dokcerfile都填写完全的信息，比如我这个需求就是添加一些配置文件，那么Docker就可以只有<code>FROM</code>和<code>COPY</code></li>
+<li>在基于原来的image制作新的时，只需要设置需要修改的部分即可，不需要每个Dokcerfile都填写完全的信息，比如我这个需求就是添加一些配置文件，那么Dockerfile就可以只有<code>FROM</code>和<code>COPY</code></li>
 </ul>
 <p><img src="/img/docker-inspect.png" alt=""></p>
 <h3 id="docker-compose关联多个docker"><a href="#docker-compose关联多个docker" class="headerlink" title="docker-compose关联多个docker"></a>docker-compose关联多个docker</h3><p>制作工程中还有一个点学习到的就是docker-compose.yml中可以通过links方便的的吧两个docker连通，这个词可能不准确，我的理解是可能互相认识，可以通过名字访问到对方</p>
@@ -374,20 +374,6 @@
 
     
 <div class="share">
-    
-        <div class="bdsharebuttonbox">
-            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
-            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
-            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
-        </div>
-        <script>
-            window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Mac下使用dokcer搭建开发环境记录　| Whyming's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-        </script>
     
 
     

@@ -3,6 +3,21 @@
   
     
     <entry>
+      <title>奇怪的问题记录</title>
+      <link href="/2018/06/08/%E5%A5%87%E6%80%AA%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
+      <url>/2018/06/08/%E5%A5%87%E6%80%AA%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
+      <content type="html"><![CDATA[<p>一些在工作中遇到的奇怪问题的记录，方便回忆查找<br><a id="more"></a></p><h3 id="Mac-OS-X-下目录名大小写不敏感问题"><a href="#Mac-OS-X-下目录名大小写不敏感问题" class="headerlink" title="Mac OS X 下目录名大小写不敏感问题"></a>Mac OS X 下目录名大小写不敏感问题</h3><p>在Terminal里，<code>cd</code> 命令可以进入一个忽略大小写的目录，比如我有一个目录，<code>~/Go</code>,我可以<code>cd ~/Go</code>,也可以<code>cd ~/go</code>，实际上这两个命令进入的是同一个目录。进而发现Mac默认文件和目录是不区分大小写的（这个有点反*inux），但是多数程序是关系区分大小写的。所以就出现问题了。</p><p>在一个Nsq的项目里使用的vendor作依赖管理，用dep也已经下载好了，但是test通不过，build也不行，说找不到package，而且从错误信息上看，只搜索了GOPATH和GOROOT，检查vendor目录，依赖包都在，怎么也找不到原因，最后猜测可能和目录大小写有关，因为之前是<code>cd go</code>而目录名是Go，这次<code>cd Go</code>然后逐层进入，再次test，果然好了</p><blockquote><p>总结：OS X 默认不区分大小写，在Terminal使用的时候要注意目录名称，或者统一使用小写避免问题，另外可以新建一个大小写敏感的分区</p></blockquote><p><a href="http://blog.bihe0832.com/mac-disk-utility.html" target="_blank" rel="noopener">OS X 中设置大小写敏感的分区并切换</a></p>]]></content>
+      
+      
+        <tags>
+            
+            <tag> 记录 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>Mac下使用dokcer搭建开发环境记录</title>
       <link href="/2018/06/01/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8dokcer%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E8%AE%B0%E5%BD%95/"/>
       <url>/2018/06/01/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8dokcer%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E8%AE%B0%E5%BD%95/</url>

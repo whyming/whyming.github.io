@@ -3,6 +3,23 @@
   
     
     <entry>
+      <title>算法200题训练</title>
+      <link href="/2018/06/27/%E7%AE%97%E6%B3%95200%E9%A2%98%E8%AE%AD%E7%BB%83/"/>
+      <url>/2018/06/27/%E7%AE%97%E6%B3%95200%E9%A2%98%E8%AE%AD%E7%BB%83/</url>
+      <content type="html"><![CDATA[<h2 id="算法200题训练"><a href="#算法200题训练" class="headerlink" title="算法200题训练"></a>算法200题训练</h2><p>加强算法概念和算法思考方式，向左老师学习，先练200题，中间适当穿插理论知识学习</p><p>目前思路：</p><ul><li>每周两题，以见过的，且有完整分析的经典问题为主</li><li>20题后开始按系统查找算法题，集中突击不同类型算题，如二叉树，字符串匹配等，以经典问题为主。</li><li>每10题左右增加一篇总结和回顾</li></ul>]]></content>
+      
+      
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 日常 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>Nsq源码学习笔记（一）----nsqd启动</title>
       <link href="/2018/06/08/Nsq%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89----nsqd%E5%90%AF%E5%8A%A8/"/>
       <url>/2018/06/08/Nsq%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89----nsqd%E5%90%AF%E5%8A%A8/</url>

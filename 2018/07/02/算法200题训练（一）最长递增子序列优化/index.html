@@ -13,20 +13,28 @@
   <meta name="format-detection" content="telephone=no" />
   <meta name="author" content="whyming" />
 
-  <meta name="description" content="搭建环境中一些知识点的记录，帮助自己回忆一些遇到的问题">
-  <meta name="keywords" content="记录">
+  <meta name="description" content="将最长递增子序列的算法复杂度在原来的基础上优化到O(N*logN)">
+  <meta name="keywords" content="go,算法">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Mac下使用dokcer搭建开发环境记录">
-  <meta property="og:url" content="http://yoursite.com/2018/06/01/Mac下使用dokcer搭建开发环境记录/index.html">
+  <meta property="og:title" content="算法200题训练（一）最长递增子序列优化">
+  <meta property="og:url" content="http://yoursite.com/2018/07/02/算法200题训练（一）最长递增子序列优化/index.html">
   <meta property="og:site_name" content="Whyming&#39;s Blog">
-  <meta property="og:description" content="搭建环境中一些知识点的记录，帮助自己回忆一些遇到的问题">
+  <meta property="og:description" content="将最长递增子序列的算法复杂度在原来的基础上优化到O(N*logN)">
   <meta property="og:locale" content="zh-Hans">
-  <meta property="og:image" content="http://yoursite.com/img/docker-inspect.png">
-  <meta property="og:updated_time" content="2018-06-06T06:25:09.620Z">
+  <meta property="og:image" content="https://blog.whyming.com/2018/06/27/%E7%AE%97%E6%B3%95200%E9%A2%98%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%80%EF%BC%89%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/R2.svg">
+  <meta property="og:image" content="http://yoursite.com/2018/07/02/算法200题训练（一）最长递增子序列优化/R0.svg">
+  <meta property="og:image" content="http://yoursite.com/2018/07/02/算法200题训练（一）最长递增子序列优化/R1.svg">
+  <meta property="og:image" content="http://yoursite.com/2018/07/02/算法200题训练（一）最长递增子序列优化/R2.svg">
+  <meta property="og:image" content="http://yoursite.com/2018/07/02/算法200题训练（一）最长递增子序列优化/R3.svg">
+  <meta property="og:image" content="http://yoursite.com/2018/07/02/算法200题训练（一）最长递增子序列优化/R4.svg">
+  <meta property="og:image" content="http://yoursite.com/2018/07/02/算法200题训练（一）最长递增子序列优化/R5.svg">
+  <meta property="og:image" content="http://yoursite.com/2018/07/02/算法200题训练（一）最长递增子序列优化/R6.svg">
+  <meta property="og:image" content="http://yoursite.com/2018/07/02/算法200题训练（一）最长递增子序列优化/R7.svg">
+  <meta property="og:updated_time" content="2018-07-03T07:32:46.466Z">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Mac下使用dokcer搭建开发环境记录">
-  <meta name="twitter:description" content="搭建环境中一些知识点的记录，帮助自己回忆一些遇到的问题">
-  <meta name="twitter:image" content="http://yoursite.com/img/docker-inspect.png">
+  <meta name="twitter:title" content="算法200题训练（一）最长递增子序列优化">
+  <meta name="twitter:description" content="将最长递增子序列的算法复杂度在原来的基础上优化到O(N*logN)">
+  <meta name="twitter:image" content="https://blog.whyming.com/2018/06/27/%E7%AE%97%E6%B3%95200%E9%A2%98%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%80%EF%BC%89%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/R2.svg">
 
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -45,7 +53,7 @@
 
   <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
-  <title>Mac下使用dokcer搭建开发环境记录 | Whyming&#39;s Blog</title>
+  <title>算法200题训练（一）最长递增子序列优化 | Whyming&#39;s Blog</title>
 
   <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -274,12 +282,12 @@
       </nav>
 
       <div class="body-wrap">
-        <article id="title-Mac下使用dokcer搭建开发环境记录" class="article article-type-title"
-                                                                                        itemscope itemprop="blogPost">
+        <article id="post-算法200题训练（一）最长递增子序列优化" class="article article-type-post" itemscope
+                                                                                        itemprop="blogPost">
 
           <div class="article-meta">
-            <a href="/2018/06/01/Mac下使用dokcer搭建开发环境记录/" class="article-date">
-              <time datetime="2018-06-01T02:52:13.000Z" itemprop="datePublished">2018-06-01</time>
+            <a href="/2018/07/02/算法200题训练（一）最长递增子序列优化/" class="article-date">
+              <time datetime="2018-07-02T10:05:26.000Z" itemprop="datePublished">2018-07-02</time>
             </a>
 
           </div>
@@ -290,7 +298,7 @@
 
             <header class="article-header">
               <h1 class="article-title" itemprop="name">
-                Mac下使用dokcer搭建开发环境记录
+                算法200题训练（一）最长递增子序列优化
               </h1>
 
             </header>
@@ -300,7 +308,10 @@
               <div class="article-tag tagcloud">
                 <ul class="article-tag-list">
                   <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="/tags/记录/">记录</a>
+                    <a class="article-tag-list-link" href="/tags/go/">go</a>
+                  </li>
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/算法/">算法</a>
                   </li>
                 </ul>
               </div>
@@ -310,99 +321,90 @@
 
             <div class="article-entry" itemprop="articleBody">
 
-              <pre><code>搭建环境中一些知识点的记录，帮助自己回忆一些遇到的问题
-</code></pre>
-              <a id="more"></a>
-              <h2 id="背景">
-                <a href="#背景" class="headerlink" title="背景"></a>背景</h2>
-              <p>工作内容包含多个项目，对应语言为php，不同项目独立维护，通过不同的域名接入，系统之间通过http交换信息。目标是实现一个一键式脚本，搭建一个开发环境可以同时支持多个项目运行，其实就是Nginx+php-fpm的docker+git
-                checkout代码，然后
-                <code>docker-compose</code>一起管理。
-                <br>有两个注意点</p>
-              <ul>
-                <li>多个项目同时存在，需要通过域名区分每个项目的入口地址</li>
-                <li>多个项目在不同的git项目上，最好能一次性准备好</li>
-              </ul>
-              <h3 id="阿里云的docker源">
-                <a href="#阿里云的docker源" class="headerlink" title="阿里云的docker源"></a>阿里云的docker源</h3>
-              <p>为了解决docker pull 的问题优先使用的是
-                <a href="https://dev.aliyun.com/search.html" target="_blank" rel="noopener">阿里云</a>的仓库，在上面找的nginx和php-fpm，需要注意的是上面的发布的image不一定都是好用的，pull之后检查一下是否符合需求。</p>
-              <h3 id="build自己的image">
-                <a href="#build自己的image" class="headerlink" title="build自己的image"></a>build自己的image</h3>
-              <p>制作这个一键式脚本最花费时间的地方是，想要重新build一个image，默认包含nginx的配置。不同域名对应不同的项目，一个docker通过nginx配置同时支持多个项目。当然配置域名后要在本地修改hosts文件才能正常访问。制作image就需要写一个Dockerfile，目的就是copy一些
-                <code>nginx_xxx.conf</code>的配置文件进去，其他的信息不用修改。在这里学到了两个知识点：</p>
-              <ul>
-                <li>使用
-                  <code>doker inspect [image_id]</code>可以查看某个镜像的当前设置，包含
-                  <code>CMD</code>
-                  <code>Volumes</code>
-                  <code>EXPOSE</code>等，如下图</li>
-                <li>在基于原来的image制作新的时，只需要设置需要修改的部分即可，不需要每个Dokcerfile都填写完全的信息，比如我这个需求就是添加一些配置文件，那么Dockerfile就可以只有
-                  <code>FROM</code>和
-                  <code>COPY</code>
-                </li>
-              </ul>
-              <p>
-                <img src="/img/docker-inspect.png" alt="">
-              </p>
-              <h3 id="docker-compose关联多个docker">
-                <a href="#docker-compose关联多个docker" class="headerlink" title="docker-compose关联多个docker"></a>docker-compose关联多个docker</h3>
-              <p>制作工程中还有一个点学习到的就是docker-compose.yml中可以通过links方便的的吧两个docker连通，这个词可能不准确，我的理解是可能互相认识，可以通过名字访问到对方</p>
-              <h3 id="mysql密码问题">
-                <a href="#mysql密码问题" class="headerlink" title="mysql密码问题"></a>mysql密码问题</h3>
-              <p>运行mysql的docker时，需要指定一个重要的环境变量
-                <code>MYSQL_ROOT_PASSWORD</code>，最好加上
-                <code>MYSQL_ROOT_HOST=%</code>，但是好多地方都没有说明挂载data的问题，自己就遇到了设置了
-                <code>MYSQL_ROOT_PASSWORD</code>但是连接失败的问题，原因就在挂载
-                <code>/var/lib/msyql</code>这个目录的时候里面有上次运行的文件，导致没能将新的密码设置进去。简单的方法就是第一次启动前确认挂载的目录是空的，保证这次启动时完全初始化的。</p>
-              <h3 id="sudo-和重定向问题">
-                <a href="#sudo-和重定向问题" class="headerlink" title="sudo 和重定向问题"></a>sudo 和重定向问题</h3>
-              <p>在制作一键式脚本时，因为要更新hosts文件，需要执行类似
+              <p>将最长递增子序列的算法复杂度在原来的基础上优化到O(N*logN)
                 <br>
-                <code>sudo echo &quot;$hosts_conf&quot; &gt;&gt;/etc/hosts</code>
-                <br>一直提示
-                <code>Permission denied</code>，感觉sudo没起作用，实际上是sudo只授权给了
-                <code>echo</code>而重定向
-                <code>&gt;&gt;</code>也需要sudo权限，搜索结果y
-                <br>
-                <code>sudo sh -c &quot;echo \&quot;$host_config\&quot; &gt;&gt; /etc/hostscd
-                  &quot;</code>
-                <br>感觉上有点像eval的样子，将所有动作都包含在一起了</p>
-              <h3 id="sed替换路径问题">
-                <a href="#sed替换路径问题" class="headerlink" title="sed替换路径问题"></a>sed替换路径问题</h3>
-              <p>sed替换字符串中的某些特定字符很简单</p>
-              <p>
-                <code>sed &quot;s/abc/ABC/g&quot; filename.txt</code>
+                <a id="more"></a>
               </p>
-              <p>使用变量的话</p>
-              <p>
-                <code>sed &quot;s/$src/$dst/g&quot; filename.txt</code>
-              </p>
-              <p>但是如果变量中带有
-                <code>/</code>就又问题，一个方法是保证变量内的
-                <code>/</code>被替换为
-                <code>\/</code>转义后在传进来，不过还有一个更好的办法</p>
-              <p>
-                <code>sed &quot;s#$src#$dst#g&quot;</code>
-              </p>
-              <p>这样
-                <code>/</code>就不需要转义了</p>
-              <h3 id="host问题">
-                <a href="#host问题" class="headerlink" title="host问题"></a>host问题</h3>
-              <p>由于多个php项目都在同一个挂载目录，同时不同项目使用了不同的域名，且不同项目见接口调用使用了域名进行访问。一开始只有本机配置了hosts文件，保证本地访问时可以通过127.0.0.1
-                访问正常，但是遇到项目间接口调用的时候出现了Connection Refuse。原因是php-fpm docker内查找域名的时候没有找到，所以通过本机得到了域名指向的是127.0.0.1，于是访问本地，然后出错了，因为对于本机来说127.0.0.1已经和docker做了端口映射，但是php-fpm内部访问的自己内部的端口，需要让php-fpm访问nginx的端口就对了。最近解决方法是给每个容器指定ip，且给php-fpm增加host配置</p>
-              <figure class="highlight yml">
+              <h3 id="最长递增子序列优化">
+                <a href="#最长递增子序列优化" class="headerlink" title="最长递增子序列优化"></a>最长递增子序列优化</h3>
+              <p>上一篇的
+                <a href="https://blog.whyming.com/2018/06/27/%E7%AE%97%E6%B3%95200%E9%A2%98%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%80%EF%BC%89%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/"
+                                                                                                target="_blank" rel="noopener">最长递增子序列</a>最终实现的时间复杂度为
+                <strong>O(N^2)</strong>，现在将要想办法把时间复杂度降到
+                <strong>O(N*logN)</strong>，且空间复杂度不变。</p>
+              <p>上一篇中从代码可以看出两层的for循环，最外层的N是避免不了的，那么里面那层，却存在优化的可能。让我们复习一下里面的那层循环</p>
+              <figure class="highlight go">
                 <table>
                   <tr>
                     <td class="gutter">
-                      <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+                      <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
                     </td>
                     <td class="code">
-                      <pre><span class="line"><span class="string">...</span></span><br><span class="line">	<span class="attr">networks:</span></span><br><span class="line"><span class="attr">      finance-network:</span></span><br><span class="line"><span class="attr">        ipv4_address:</span> <span class="number">172.28</span><span class="number">.0</span><span class="number">.10</span></span><br><span class="line"><span class="attr">   extra_hosts:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"dev.xxx.xxx.com:172.28.0.11"</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  finance-network:</span></span><br><span class="line"><span class="attr">    driver:</span> <span class="string">bridge</span></span><br><span class="line"><span class="attr">    ipam:</span></span><br><span class="line"><span class="attr">      driver:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">      config:</span></span><br><span class="line"><span class="attr">        - subnet:</span> <span class="number">172.28</span><span class="number">.0</span><span class="number">.0</span><span class="string">/24</span></span><br></pre>
+                      <pre><span class="line"><span class="keyword">for</span> j, tmp := <span class="keyword">range</span> L[:i] &#123;</span><br><span class="line">	<span class="keyword">if</span> tmp &lt; item &#123;</span><br><span class="line">		R[i] = max(R[i], R[j]+<span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
                     </td>
                   </tr>
                 </table>
               </figure>
+              <p>这层在做什么呢，循环数组i以前的部分，找到比L[i]更小的数，然后去的这些数中最大的那个+1</p>
+              <p>举例
+                <code>L=[2,1,6,4,5,2,7,4]</code>，求R[3]的时候</p>
+              <p>
+                <img src="https://blog.whyming.com/2018/06/27/%E7%AE%97%E6%B3%95200%E9%A2%98%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%80%EF%BC%89%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/R2.svg"
+                                                                                                alt="R3">
+              </p>
+              <p>这是后L[3]=4,比L[0]=2、L[1]=1都大，且R[0]和R[1]都等于1，所以R[3]=2。
+                <br>再深入考虑一下，R[0]和R[1]都是1，那么有必要保存两个吗？如果只保留一个R[0]呢，有什么影响吗？如果只保留一个R[1]有什么影响吗？只保留R[0]不可以，因为当i=5的时候L[5]=2,本来R[5]应该等于2的，这样只能为1了。所以当R中两个数相等的时候只需要保留对应L小的那个，就可以不影响后面的数在这个基础上追加变长，因为有一个小的数保证序列长度了，要一个那么大的数干什么，影响后面的发展啊。</p>
+              <p>同理，
+                <code>R[2]=3,R[3]=2</code>，那么只保留R[3]就可以了，因为
+                <code>L[3]=4 &lt; L[2]=6</code>,想象一下，有一个4结尾的长度为2的序列，谁还想得起6结尾同样长度也是2的，因为不管接下来的是5还是7,4结尾的比6结尾的做的都好。</p>
+              <p>按照这个思路，两个相同的只保留一个，最终得到的R中将不会有重复的数了，R中实际上存储了两个信息，一个是下标i表示
+                <strong>对应到L[i]的数结尾</strong>，具体R的值表示的才是子序列长度。 那么个R表的的意思就是：每一个未删除掉的R[i]表示长度为R[i]的子序列中结尾最小的值为L[i]。比如R[5]=2,表示所有长度为2的最小递增子序列中，结尾最小的最小递增子序列的结尾是L[5]=2</p>
+              <p>这时让我们整理一下R，把那些删除的在最开始就不要插入，同时让i和R[i]的信息对调一下，变成：
+                <strong>R[i]表示的是长度为i的最小递增子序列中，结尾最小的那个序列的结尾是R[i]</strong>
+              </p>
+              <p>下面我们来逐步生成一下R,通过遍历L来逐步更新R,注意R的下标不随L遍历同步增加，为了区分下面用R[j]表示,因为数组的下标是从0开始的，所以我们还需要+1表示长度
+                <br>i=0的时候,只有一个2，所以长度为0+1的子序列的最小结尾为2
+                <br>
+                <img src="./R0.svg" alt="R0">
+              </p>
+              <p>i=1,因为1比2小，不能让子序列变长，所以最长递增子序列长度还是1，这时存在两个最长递增子序列，分别是[2]和[1]，长度都是1，但是[1]的结尾比[2]小，所以更新R[0]=1
+                <br>
+                <img src="./R1.svg" alt="R1">
+              </p>
+              <p>i=2,L[2] = 6, 这时在R中查找小于6的数(而不是在L中)R中只有一个1，意思是目前只存在一个长度为1的最小递增子序列，且结尾为1，因为6&gt;1，所以一定存在一个长度为2，结尾为6的最小递增子序列。
+                <br>
+                <img src="./R2.svg" alt="R2">
+              </p>
+              <p>i=3,L[3]=4，这时还是在R中查找，小于4的值，目前R=[1,6]。1&lt;4, 6&gt;4，所以一定存在一个最长递增子序列的长度为2，结尾为4，这时发现，原来已经存在一个长度为2，结尾为6的，4&lt;6
+                那么这时更新R将长度为2的最长递增子序列的结尾改为4
+                <br>
+                <img src="./R3.svg" alt="R3">
+              </p>
+              <p>i=4,L[4]=5, 因为在R中没有比5大的数，所以一定存在一个更长的递增子序列，且结尾为5。
+                <br>
+                <img src="./R4.svg" alt="R4">
+              </p>
+              <p>i=5,L[5]=2, 在R中R[0]=1
+                <2 ,r[1]="4">2, 所以更新为2，即长度为2的递增子序列，最小结尾为2
+                  <br>
+                  <img src="./R5.svg" alt="R5">
+                </2>
+              </p>
+              <p>i=6,L[6]=7,在R中没有找到比7大的数，最大的是R[2]=5,所以一定存在一个长度为4，结尾为7的递增子序列，R[3]=7,
+                <br>
+                <img src="./R6.svg" alt="R6">
+              </p>
+              <p>i=7,L[7] = 4,第一个比4大的R值就是R[2]=5,所以更新R[2]=4
+                <br>
+                <img src="./R7.svg" alt="R7">
+              </p>
+              <p>最后R值中存在的最后一个数是R[3] = 7，即存在一个长度为3+1=4的递增子序列，且结尾为7</p>
+              <p>那么每次更新或插入R值时的时间复杂度是多少呢？
+                <br>首先我们把上面的过程表达一下：</p>
+              <ul>
+                <li>当L[i]在R中从左到右找到第一个大于等与L[i]的值时，更新R当前下标对应的值为L[i],见：i=1,</li>
+                <li>当L[i]在R中不存在比L[i]大的值时，向R后追加新的值，方式时R的下标+1，填入L[i],见：i=2,</li>
+              </ul>
 
             </div>
 
@@ -410,15 +412,9 @@
 
           <nav id="article-nav">
 
-            <div id="article-nav-newer" class="article-nav-title">
-              <a href="/2018/06/08/奇怪的问题记录/">
-                奇怪的问题记录
-              </a>
-            </div>
-
             <div id="article-nav-older" class="article-nav-title">
-              <a href="/2018/05/30/笔记博客开坑/">
-                笔记博客开坑
+              <a href="/2018/06/27/算法200题训练（一）最长递增子序列/">
+                算法200题训练（一）最长递增子序列
               </a>
             </div>
 
@@ -429,63 +425,12 @@
           <strong class="toc-title">文章目录</strong>
 
           <ol class="toc">
-            <li class="toc-item toc-level-2">
-              <a class="toc-link" href="#背景">
+            <li class="toc-item toc-level-3">
+              <a class="toc-link" href="#最长递增子序列优化">
                 <span class="toc-number">1.</span>
                 <span class="toc-text">
-                  背景</span>
+                  最长递增子序列优化</span>
               </a>
-              <ol class="toc-child">
-                <li class="toc-item toc-level-3">
-                  <a class="toc-link" href="#阿里云的docker源">
-                    <span class="toc-number">1.1.</span>
-                    <span class="toc-text">
-                      阿里云的docker源</span>
-                  </a>
-                </li>
-                <li class="toc-item toc-level-3">
-                  <a class="toc-link" href="#build自己的image">
-                    <span class="toc-number">1.2.</span>
-                    <span class="toc-text">
-                      build自己的image</span>
-                  </a>
-                </li>
-                <li class="toc-item toc-level-3">
-                  <a class="toc-link" href="#docker-compose关联多个docker">
-                    <span class="toc-number">1.3.</span>
-                    <span class="toc-text">
-                      docker-compose关联多个docker</span>
-                  </a>
-                </li>
-                <li class="toc-item toc-level-3">
-                  <a class="toc-link" href="#mysql密码问题">
-                    <span class="toc-number">1.4.</span>
-                    <span class="toc-text">
-                      mysql密码问题</span>
-                  </a>
-                </li>
-                <li class="toc-item toc-level-3">
-                  <a class="toc-link" href="#sudo-和重定向问题">
-                    <span class="toc-number">1.5.</span>
-                    <span class="toc-text">
-                      sudo 和重定向问题</span>
-                  </a>
-                </li>
-                <li class="toc-item toc-level-3">
-                  <a class="toc-link" href="#sed替换路径问题">
-                    <span class="toc-number">1.6.</span>
-                    <span class="toc-text">
-                      sed替换路径问题</span>
-                  </a>
-                </li>
-                <li class="toc-item toc-level-3">
-                  <a class="toc-link" href="#host问题">
-                    <span class="toc-number">1.7.</span>
-                    <span class="toc-text">
-                      host问题</span>
-                  </a>
-                </li>
-              </ol>
             </li>
           </ol>
 
@@ -516,8 +461,8 @@
 
         <div class="scroll" id="post-nav-button">
 
-          <a href="/2018/06/08/奇怪的问题记录/" title="上一篇: 奇怪的问题记录">
-            <i class="fa fa-angle-left"></i>
+          <a href="/" title="回到主页">
+            <i class="fa fa-home"></i>
           </a>
 
           <a title="文章列表">
@@ -525,7 +470,7 @@
             <i class="fa fa-times"></i>
           </a>
 
-          <a href="/2018/05/30/笔记博客开坑/" title="下一篇: 笔记博客开坑">
+          <a href="/2018/06/27/算法200题训练（一）最长递增子序列/" title="下一篇: 算法200题训练（一）最长递增子序列">
             <i class="fa fa-angle-right"></i>
           </a>
 

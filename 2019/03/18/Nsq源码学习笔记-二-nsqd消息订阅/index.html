@@ -14,13 +14,18 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="author" content="whyming">
 
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Whyming&#39;s Blog">
-  <meta property="og:url" content="http://yoursite.com/tags/Nsq/index.html">
+  <meta name="description" content="nsqd.Main内部逻辑很少，启动了6个goroutine，下面简单说一下goroutine的作用    tcpserver，监听客户端连接，很重要，下面消息订阅就是在这里面发生的   httpserver，监听http请求，提供rest api 服务   httpsserver，监听https请求，其实和http的一样   queueScanLoop，应该是监听消息队列的，稍后回来填坑   l">
+  <meta name="keywords" content="Nsq,go,源码学习">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Nsq源码学习笔记(二) --- nsqd消息订阅">
+  <meta property="og:url" content="http://yoursite.com/2019/03/18/Nsq源码学习笔记-二-nsqd消息订阅/index.html">
   <meta property="og:site_name" content="Whyming&#39;s Blog">
+  <meta property="og:description" content="nsqd.Main内部逻辑很少，启动了6个goroutine，下面简单说一下goroutine的作用    tcpserver，监听客户端连接，很重要，下面消息订阅就是在这里面发生的   httpserver，监听http请求，提供rest api 服务   httpsserver，监听https请求，其实和http的一样   queueScanLoop，应该是监听消息队列的，稍后回来填坑   l">
   <meta property="og:locale" content="zh-Hans">
+  <meta property="og:updated_time" content="2019-03-19T01:51:19.430Z">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Whyming&#39;s Blog">
+  <meta name="twitter:title" content="Nsq源码学习笔记(二) --- nsqd消息订阅">
+  <meta name="twitter:description" content="nsqd.Main内部逻辑很少，启动了6个goroutine，下面简单说一下goroutine的作用    tcpserver，监听客户端连接，很重要，下面消息订阅就是在这里面发生的   httpserver，监听http请求，提供rest api 服务   httpsserver，监听https请求，其实和http的一样   queueScanLoop，应该是监听消息队列的，稍后回来填坑   l">
 
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -39,7 +44,7 @@
 
   <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
-  <title>Tag: Nsq | Whyming&#39;s Blog</title>
+  <title>Nsq源码学习笔记(二) --- nsqd消息订阅 | Whyming&#39;s Blog</title>
 
   <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -49,9 +54,9 @@
       fancybox: true,
       animate: true,
       isHome: false,
-      isPost: false,
+      isPost: true,
       isArchive: false,
-      isTag: true,
+      isTag: false,
       isCategory: false,
       fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
       scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -279,93 +284,190 @@
       </nav>
 
       <div class="body-wrap">
-        <section class="archives-wrap">
-          <div class="archive-year-wrap">
-            <a href="/archives/2019" class="archive-year">2019</a>
+        <article id="post-Nsq源码学习笔记-二-nsqd消息订阅" class="article article-type-post" itemscope=""
+                                                                                        itemprop="blogPost">
+
+          <div class="article-meta">
+            <a href="/2019/03/18/Nsq源码学习笔记-二-nsqd消息订阅/" class="article-date">
+              <time datetime="2019-03-18T11:46:35.000Z" itemprop="datePublished">2019-03-18</time>
+            </a>
+
           </div>
-          <div class="archives">
 
-            <article class="archive-article archive-type-post">
-              <div class="archive-article-inner">
-                <header class="archive-article-header">
-                  <div class="article-meta">
-                    <a href="/2019/03/18/Nsq源码学习笔记-二-nsqd消息订阅/" class="archive-article-date">
-                      <time datetime="2019-03-18T11:46:35.000Z" itemprop="datePublished">03-18</time>
-                    </a>
+          <div class="article-inner">
 
-                  </div>
-                  <h1 itemprop="name">
-                    <a class="archive-article-title" href="/2019/03/18/Nsq源码学习笔记-二-nsqd消息订阅/">Nsq源码学习笔记(二) --- nsqd消息订阅</a>
-                  </h1>
+            <input type="hidden" class="isFancy">
 
-                  <div class="article-info info-on-archive">
+            <header class="article-header">
+              <h1 class="article-title" itemprop="name">
+                Nsq源码学习笔记(二) --- nsqd消息订阅
+              </h1>
 
-                    <div class="article-tag tagcloud">
-                      <ul class="article-tag-list">
-                        <li class="article-tag-list-item">
-                          <a class="article-tag-list-link" href="/tags/Nsq/">Nsq</a>
-                        </li>
-                        <li class="article-tag-list-item">
-                          <a class="article-tag-list-link" href="/tags/go/">go</a>
-                        </li>
-                        <li class="article-tag-list-item">
-                          <a class="article-tag-list-link" href="/tags/源码学习/">源码学习</a>
-                        </li>
-                      </ul>
-                    </div>
+            </header>
 
-                  </div>
-                  <div class="clearfix"></div>
-                </header>
+            <div class="article-info article-info-post">
+
+              <div class="article-tag tagcloud">
+                <ul class="article-tag-list">
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/Nsq/">Nsq</a>
+                  </li>
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/go/">go</a>
+                  </li>
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/源码学习/">源码学习</a>
+                  </li>
+                </ul>
               </div>
-            </article>
+
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="article-entry" itemprop="articleBody">
+
+              <p>nsqd.Main内部逻辑很少，启动了6个goroutine，下面简单说一下goroutine的作用</p>
+              <ul>
+                <li>tcpserver，监听客户端连接，很重要，下面消息订阅就是在这里面发生的</li>
+                <li>httpserver，监听http请求，提供rest api 服务</li>
+                <li>httpsserver，监听https请求，其实和http的一样</li>
+                <li>queueScanLoop，应该是监听消息队列的，稍后回来填坑</li>
+                <li>lookupLoop ，和nsqlookupd通信的</li>
+                <li>statsdLoop， 状态同步</li>
+              </ul>
+              <h4 id="tcpserver">
+                <a href="#tcpserver" class="headerlink" title="tcpserver"></a>tcpserver</h4>
+              <p>连接成功后，立刻读取前4个字节，
+                <code>[ ][ ][V][2]</code>,前两个空格应该是预留，这个是用来判断通信协议版本的，目前只有V2,</p>
+              <p>然后开始
+                <code>prot.IOLoop</code>, 这个是tcpserver最主要的事情了， 里面也主要包含两部分</p>
+              <ul>
+                <li>启动
+                  <code>messagePump</code>,这是一个goroutine，处理消息转发等</li>
+                <li>循环读取client发来的消息，解析成命令并执行，同时还包含了维护心跳</li>
+              </ul>
+              <p>
+                <code>messagePump</code>通过循环读取多个chan来实现消息读取，事件触发，其中就包含对订阅消息的转发</p>
+              <p>当client发送一个
+                <code>SUB topicName Channel</code>给nsqd时， nsqd在检查topic和channel合法性后，会创建一个新的channel，放入
+                <code>subEventChan</code>，
+                <code>messagePump</code>监听并得到这个chan后，会继监听这个chan的消息，一旦这个channel有消息发来，则会将channel的消息转发给client，这样客户端就得到了订阅的消息推送。</p>
+              <p>channel的消息哪来的呢？原来在topic创建channel的时候，同时会把这channel加入topic的channel列表，当top接受到消息的时候，发送给列表中的每一个channel，这样可以实现一个topic，多个订阅channel都能得到消息。</p>
+              <p>另外因为topic在创建channel的时候使用的是
+                <code>getOrCreateChannel</code>从名字看就知道，如果已经存在这个名字的channel则直接返回已经存在的channel，如果不存在才创建。那么如果订阅了一个已经存在的channel，就是说别人也监听了的channel会怎么样呢，这个问题转换成了，如果一个go
+                channel多出代码读取，将随机的的一个读到消息，所以订阅同一个channel的客户端将随机收到消息。听说这样设计是为了实现客户端的均衡，可以让多个客户端随机消费同一个channel
+              </p>
+
+            </div>
 
           </div>
-        </section>
 
-        <section class="archives-wrap">
-          <div class="archive-year-wrap">
-            <a href="/archives/2018" class="archive-year">2018</a>
-          </div>
-          <div class="archives">
+          <nav id="article-nav">
 
-            <article class="archive-article archive-type-post">
-              <div class="archive-article-inner">
-                <header class="archive-article-header">
-                  <div class="article-meta">
-                    <a href="/2018/06/08/Nsq源码学习笔记（一）----nsqd启动/" class="archive-article-date">
-                      <time datetime="2018-06-08T09:50:49.000Z" itemprop="datePublished">06-08</time>
-                    </a>
+            <div id="article-nav-older" class="article-nav-title">
+              <a href="/2018/07/23/算法200题训练02-平衡二叉树/">
+                算法200题训练02-平衡二叉树
+              </a>
+            </div>
 
-                  </div>
-                  <h1 itemprop="name">
-                    <a class="archive-article-title" href="/2018/06/08/Nsq源码学习笔记（一）----nsqd启动/">Nsq源码学习笔记（一）----nsqd启动</a>
-                  </h1>
+          </nav>
 
-                  <div class="article-info info-on-archive">
+        </article>
+        <div id="toc" class="toc-article">
+          <strong class="toc-title">文章目录</strong>
 
-                    <div class="article-tag tagcloud">
-                      <ul class="article-tag-list">
-                        <li class="article-tag-list-item">
-                          <a class="article-tag-list-link" href="/tags/Nsq/">Nsq</a>
-                        </li>
-                        <li class="article-tag-list-item">
-                          <a class="article-tag-list-link" href="/tags/go/">go</a>
-                        </li>
-                        <li class="article-tag-list-item">
-                          <a class="article-tag-list-link" href="/tags/源码阅读/">源码阅读</a>
-                        </li>
-                      </ul>
-                    </div>
+          <ol class="toc">
+            <li class="toc-item toc-level-4">
+              <a class="toc-link" href="#tcpserver">
+                <span class="toc-number">1.</span>
+                <span class="toc-text">
+                  tcpserver</span>
+              </a>
+            </li>
+          </ol>
 
-                  </div>
-                  <div class="clearfix"></div>
-                </header>
-              </div>
-            </article>
+        </div>
+        <style>
+          .left-col .switch-btn,
+          .left-col .switch-area {
+            display: none;
+          }
 
-          </div>
-        </section>
+          .toc-level-3 i,
+          .toc-level-3 ol {
+            display: none !important;
+          }
+
+        </style>
+
+        <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+        <script>
+          yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+
+        </script>
+
+        <div class="share">
+
+        </div>
+
+        <div class="scroll" id="post-nav-button">
+
+          <a href="/" title="回到主页">
+            <i class="fa fa-home"></i>
+          </a>
+
+          <a title="文章列表">
+            <i class="fa fa-bars"></i>
+            <i class="fa fa-times"></i>
+          </a>
+
+          <a href="/2018/07/23/算法200题训练02-平衡二叉树/" title="下一篇: 算法200题训练02-平衡二叉树">
+            <i class="fa fa-angle-right"></i>
+          </a>
+
+        </div>
+
+        <ul class="post-list">
+          <li class="post-list-item">
+            <a class="post-list-link" href="/2019/03/18/Nsq源码学习笔记-二-nsqd消息订阅/">Nsq源码学习笔记(二) --- nsqd消息订阅</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/2018/07/23/算法200题训练02-平衡二叉树/">算法200题训练02-平衡二叉树</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/2018/07/11/Go的反射库reflect学习/">Go的反射库reflect学习</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/2018/07/04/go知识点收集/">go知识点收集</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/2018/07/02/算法200题训练（一）最长递增子序列优化/">算法200题训练（一）最长递增子序列优化</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/2018/06/27/算法200题训练（一）最长递增子序列/">算法200题训练（一）最长递增子序列</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/2018/06/27/算法200题训练/">算法200题训练</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/2018/06/08/Nsq源码学习笔记（一）----nsqd启动/">Nsq源码学习笔记（一）----nsqd启动</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/2018/06/08/奇怪的问题记录/">奇怪的问题记录</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/2018/06/01/Mac下使用dokcer搭建开发环境记录/">Mac下使用dokcer搭建开发环境记录</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/2018/05/30/笔记博客开坑/">笔记博客开坑</a>
+          </li>
+        </ul>
+
+        <script>
+
+
+        </script>
       </div>
       <footer id="footer">
         <div class="outer">

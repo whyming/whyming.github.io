@@ -175,16 +175,25 @@
                 <div class="widget tagcloud" id="js-tagcloud">
                   <ul class="tag-list">
                     <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/ARTS/">ARTS</a>
+                    </li>
+                    <li class="tag-list-item">
                       <a class="tag-list-link" href="/tags/Nsq/">Nsq</a>
                     </li>
                     <li class="tag-list-item">
                       <a class="tag-list-link" href="/tags/go/">go</a>
                     </li>
                     <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/golang/">golang</a>
+                    </li>
+                    <li class="tag-list-item">
                       <a class="tag-list-link" href="/tags/二叉树/">二叉树</a>
                     </li>
                     <li class="tag-list-item">
                       <a class="tag-list-link" href="/tags/平衡二叉树/">平衡二叉树</a>
+                    </li>
+                    <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/打卡/">打卡</a>
                     </li>
                     <li class="tag-list-item">
                       <a class="tag-list-link" href="/tags/日常/">日常</a>
@@ -286,6 +295,133 @@
       </nav>
 
       <div class="body-wrap">
+        <article id="post-ARTS-第一周" class="article article-type-post" itemscope=""
+                                                                                        itemprop="blogPost">
+
+          <div class="article-meta">
+            <a href="/2019/04/01/ARTS-第一周/" class="article-date">
+              <time datetime="2019-04-01T14:31:42.000Z" itemprop="datePublished">2019-04-01</time>
+            </a>
+
+          </div>
+
+          <div class="article-inner">
+
+            <input type="hidden" class="isFancy">
+
+            <header class="article-header">
+              <h1 itemprop="name">
+                <a class="article-title" href="/2019/04/01/ARTS-第一周/">ARTS 第一周</a>
+              </h1>
+
+            </header>
+
+            <div class="article-entry" itemprop="articleBody">
+
+              <p>
+                <a href="https://www.zhihu.com/question/301150832" target="_blank" rel="noopener">《左耳听风》发起的ARTS挑战</a>
+              </p>
+              <blockquote>
+                <p>
+                  <strong>Algorithm</strong>。
+                  <strong>主要是为了编程训练和学习。</strong>每周至少做一个 leetcode 的算法题（先从Easy开始，然后再Medium，最后才Hard）。进行编程训练，如果不训练你看再多的算法书，你依然不会做算法题，看完书后，你需要训练。关于做Leetcode的的优势，你可以看一下我在coolshell上的文章
+                  <a href="https://link.zhihu.com/?target=https%3A//coolshell.cn/articles/12052.html"
+                                                                                                  target="_blank" rel="noopener">Leetcode 编程训练 - 酷 壳 - CoolShell</a>。</p>
+                <p>
+                  <strong>Review：主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。</strong>所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是
+                  <a href="https://link.zhihu.com/?target=http%3A//Medium.com" target="_blank" rel="noopener">http://Medium.com</a>（需要梯子）以及各个公司的技术blog，如Netflix的。</p>
+                <p>
+                  <strong>Tip：主要是为了总结和归纳你在是常工作中所遇到的知识点</strong>。学习至少一个技术技巧。你在工作中遇到的问题，踩过的坑，学习的点滴知识。</p>
+                <p>
+                  <strong>Share：主要是为了建立你的影响力，能够输出价值观。</strong>分享一篇有观点和思考的技术文章。</p>
+                <p>作者：陈皓</p>
+              </blockquote>
+              <h3 id="Algorithm">
+                <a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3>
+              <p>上次写了几个题，这次接着继续主要是easy和medium</p>
+              <p>这次是medium：
+                <a href="https://leetcode.com/problems/string-to-integer-atoi" target="_blank" rel="noopener">字符串转数值</a>
+              </p>
+              <figure class="highlight go">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre>
+                    </td>
+                    <td class="code">
+                      <pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">myAtoi</span><span class="params">(str <span class="keyword">string</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> (</span><br><span class="line">		isNegative = <span class="number">0</span></span><br><span class="line">		validLen   <span class="keyword">int32</span></span><br><span class="line">		startNum   <span class="keyword">bool</span></span><br><span class="line">		Max        = <span class="number">2</span> &lt;&lt; <span class="number">30</span></span><br><span class="line">		MaxPre     = <span class="number">2</span> &lt;&lt; <span class="number">30</span> / <span class="number">10</span></span><br><span class="line">	)</span><br><span class="line"></span><br><span class="line">	l := <span class="built_in">len</span>(str)</span><br><span class="line">	<span class="keyword">var</span> result <span class="keyword">int</span></span><br><span class="line">LOOP:</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; l; i++ &#123;</span><br><span class="line">		<span class="keyword">switch</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> !startNum &amp;&amp; isNegative == <span class="number">0</span> &amp;&amp; str[i] == <span class="string">' '</span>:</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		<span class="keyword">case</span> !startNum &amp;&amp; isNegative == <span class="number">0</span> &amp;&amp; str[i] == <span class="string">'-'</span>:</span><br><span class="line">			isNegative = <span class="number">-1</span></span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		<span class="keyword">case</span> !startNum &amp;&amp; isNegative == <span class="number">0</span> &amp;&amp; str[i] == <span class="string">'+'</span>:</span><br><span class="line">			isNegative = <span class="number">1</span></span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		<span class="keyword">case</span> str[i] &lt; <span class="string">'0'</span> || str[i] &gt; <span class="string">'9'</span>:</span><br><span class="line">			<span class="keyword">break</span> LOOP</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="keyword">if</span> isNegative == <span class="number">0</span> &#123;</span><br><span class="line">				isNegative = <span class="number">1</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> str[i] == <span class="string">'0'</span> &amp;&amp; result == <span class="number">0</span> &#123;</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			startNum = <span class="literal">true</span></span><br><span class="line">			validLen++</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> validLen &gt; <span class="number">10</span> || result &gt; MaxPre ||</span><br><span class="line">			(result == MaxPre &amp;&amp; (isNegative == <span class="number">1</span> &amp;&amp; str[i] &gt; <span class="string">'7'</span> &amp;&amp; str[i] &lt;= <span class="string">'9'</span> || isNegative == <span class="number">-1</span> &amp;&amp; str[i] == <span class="string">'9'</span>)) &#123;</span><br><span class="line">			<span class="keyword">if</span> isNegative == <span class="number">1</span> &#123;</span><br><span class="line">				result = Max - <span class="number">1</span></span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				result = Max</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		result = result*<span class="number">10</span> + (<span class="keyword">int</span>(str[i]) - <span class="string">'0'</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> isNegative != <span class="number">0</span> &#123;</span><br><span class="line">		result = result * isNegative</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre>
+                    </td>
+                  </tr>
+                </table>
+              </figure>
+              <h3 id="Review">
+                <a href="#Review" class="headerlink" title="Review"></a>Review</h3>
+              <p>英文阅读确实是短板，从简单的入手吧，顺便当作收藏资源</p>
+              <p>
+                <a href="https://blog.usejournal.com/staying-in-the-know-with-go-9bf719ccc3d1" target="_blank"
+                                                                                                rel="noopener">关于go应该知道的一些知识</a>
+              </p>
+              <ul>
+                <li>
+                  <a href="https://golangweekly.com/" target="_blank" rel="noopener">go周报</a>，大家都可以订阅一下，关于go的一些最新消息还有更新、文章、新闻等</li>
+                <li>
+                  <a href="https://groups.google.com/forum/#!forum/golang-nuts" target="_blank" rel="noopener">go邮件列表1</a>，
+                  <a href="https://groups.google.com/d/forum/golang-dev" target="_blank" rel="noopener">go开发者论坛</a>, 都是google自己家的，需要梯子，但是可以看到关于go的最新的讨论和发展</li>
+                <li>第三方论坛：
+                  <a href="https://old.reddit.com/r/golang/" target="_blank" rel="noopener">reddit论坛</a>，</li>
+                <li>博客：
+                  <a href="https://blog.feedspot.com/golang_blogs/" target="_blank" rel="noopener">号称top 20的golang博客的聚合</a>，看上去还不错</li>
+                <li>github 项目：
+                  <a href="https://github.com/search?q=stars%3A%3E1000+language%3AGo+cache&amp;type=Repositories"
+                                                                                                  target="_blank" rel="noopener">千星项目搜索</a>，千应该是受大家认可的项目了</li>
+                <li>GopherCon 开发者大会，这个看情况吧…</li>
+              </ul>
+              <h3 id="Tip">
+                <a href="#Tip" class="headerlink" title="Tip"></a>Tip</h3>
+              <p>刚好在写上面leetcode题的时候发现，go的字符型还是挺有意思的，当我按照下标去访问字符串元素的时候，得到的竟然是
+                <code>uint8</code>，同理，当定义一个字符的时候，其实也是使用了
+                <code>uint8</code>,其值就是对应的ascii码值，这样可以直接进行
+                <code>+-</code>操作，同时比较也很方便。</p>
+              <figure class="highlight go">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                    </td>
+                    <td class="code">
+                      <pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s := <span class="string">"abcd"</span></span><br><span class="line">	tt := reflect.TypeOf(s[<span class="number">0</span>])</span><br><span class="line">	vv := reflect.ValueOf(s[<span class="number">0</span>])</span><br><span class="line">	fmt.Printf(<span class="string">"type is: %v\n"</span>, tt)</span><br><span class="line">	fmt.Printf(<span class="string">"value is: %v\n"</span>, vv)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// type is: uint8</span></span><br><span class="line"><span class="comment">// value is: 97</span></span><br></pre>
+                    </td>
+                  </tr>
+                </table>
+              </figure>
+              <h3 id="Share">
+                <a href="#Share" class="headerlink" title="Share"></a>Share</h3>
+
+            </div>
+
+            <div class="article-info article-info-index">
+
+              <div class="article-tag tagcloud">
+                <ul class="article-tag-list">
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/ARTS/">ARTS</a>
+                  </li>
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/golang/">golang</a>
+                  </li>
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/打卡/">打卡</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="clearfix"></div>
+            </div>
+
+          </div>
+
+        </article>
+
         <article id="post-Nsq源码学习笔记-二-nsqd消息订阅" class="article article-type-post" itemscope=""
                                                                                         itemprop="blogPost">
 
@@ -318,8 +454,8 @@
                 <li>lookupLoop ，和nsqlookupd通信的</li>
                 <li>statsdLoop， 状态同步</li>
               </ul>
-              <h4 id="tcpserver">
-                <a href="#tcpserver" class="headerlink" title="tcpserver"></a>tcpserver</h4>
+              <h4 id="tcpserver-获取订阅消息">
+                <a href="#tcpserver-获取订阅消息" class="headerlink" title="tcpserver 获取订阅消息"></a>tcpserver 获取订阅消息</h4>
               <p>连接成功后，立刻读取前4个字节，
                 <code>[ ][ ][V][2]</code>,前两个空格应该是预留，这个是用来判断通信协议版本的，目前只有V2,</p>
               <p>然后开始
@@ -757,55 +893,6 @@
 
               <p class="article-more-link">
                 <a href="/2018/06/08/奇怪的问题记录/#more">阅读全文 >></a>
-              </p>
-
-              <div class="clearfix"></div>
-            </div>
-
-          </div>
-
-        </article>
-
-        <article id="title-Mac下使用dokcer搭建开发环境记录" class="article article-type-title" itemscope=""
-                                                                                        itemprop="blogPost">
-
-          <div class="article-meta">
-            <a href="/2018/06/01/Mac下使用dokcer搭建开发环境记录/" class="article-date">
-              <time datetime="2018-06-01T02:52:13.000Z" itemprop="datePublished">2018-06-01</time>
-            </a>
-
-          </div>
-
-          <div class="article-inner">
-
-            <input type="hidden" class="isFancy">
-
-            <header class="article-header">
-              <h1 itemprop="name">
-                <a class="article-title" href="/2018/06/01/Mac下使用dokcer搭建开发环境记录/">Mac下使用dokcer搭建开发环境记录</a>
-              </h1>
-
-            </header>
-
-            <div class="article-entry" itemprop="articleBody">
-
-              <pre><code>搭建环境中一些知识点的记录，帮助自己回忆一些遇到的问题
-</code></pre>
-
-            </div>
-
-            <div class="article-info article-info-index">
-
-              <div class="article-tag tagcloud">
-                <ul class="article-tag-list">
-                  <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="/tags/记录/">记录</a>
-                  </li>
-                </ul>
-              </div>
-
-              <p class="article-more-link">
-                <a href="/2018/06/01/Mac下使用dokcer搭建开发环境记录/#more">阅读全文 >></a>
               </p>
 
               <div class="clearfix"></div>

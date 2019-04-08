@@ -22,7 +22,7 @@
   <meta property="og:site_name" content="Whyming&#39;s Blog">
   <meta property="og:description" content="nsqd.Main内部逻辑很少，启动了6个goroutine，下面简单说一下goroutine的作用    tcpserver，监听客户端连接，很重要，下面消息订阅就是在这里面发生的   httpserver，监听http请求，提供rest api 服务   httpsserver，监听https请求，其实和http的一样   queueScanLoop，应该是监听消息队列的，稍后回来填坑   l">
   <meta property="og:locale" content="zh-Hans">
-  <meta property="og:updated_time" content="2019-03-19T01:51:19.430Z">
+  <meta property="og:updated_time" content="2019-03-19T01:56:01.862Z">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Nsq源码学习笔记(二) --- nsqd消息订阅">
   <meta name="twitter:description" content="nsqd.Main内部逻辑很少，启动了6个goroutine，下面简单说一下goroutine的作用    tcpserver，监听客户端连接，很重要，下面消息订阅就是在这里面发生的   httpserver，监听http请求，提供rest api 服务   httpsserver，监听https请求，其实和http的一样   queueScanLoop，应该是监听消息队列的，稍后回来填坑   l">
@@ -173,16 +173,25 @@
                 <div class="widget tagcloud" id="js-tagcloud">
                   <ul class="tag-list">
                     <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/ARTS/">ARTS</a>
+                    </li>
+                    <li class="tag-list-item">
                       <a class="tag-list-link" href="/tags/Nsq/">Nsq</a>
                     </li>
                     <li class="tag-list-item">
                       <a class="tag-list-link" href="/tags/go/">go</a>
                     </li>
                     <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/golang/">golang</a>
+                    </li>
+                    <li class="tag-list-item">
                       <a class="tag-list-link" href="/tags/二叉树/">二叉树</a>
                     </li>
                     <li class="tag-list-item">
                       <a class="tag-list-link" href="/tags/平衡二叉树/">平衡二叉树</a>
+                    </li>
+                    <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/打卡/">打卡</a>
                     </li>
                     <li class="tag-list-item">
                       <a class="tag-list-link" href="/tags/日常/">日常</a>
@@ -335,8 +344,8 @@
                 <li>lookupLoop ，和nsqlookupd通信的</li>
                 <li>statsdLoop， 状态同步</li>
               </ul>
-              <h4 id="tcpserver">
-                <a href="#tcpserver" class="headerlink" title="tcpserver"></a>tcpserver</h4>
+              <h4 id="tcpserver-获取订阅消息">
+                <a href="#tcpserver-获取订阅消息" class="headerlink" title="tcpserver 获取订阅消息"></a>tcpserver 获取订阅消息</h4>
               <p>连接成功后，立刻读取前4个字节，
                 <code>[ ][ ][V][2]</code>,前两个空格应该是预留，这个是用来判断通信协议版本的，目前只有V2,</p>
               <p>然后开始
@@ -364,6 +373,12 @@
 
           <nav id="article-nav">
 
+            <div id="article-nav-newer" class="article-nav-title">
+              <a href="/2019/04/01/ARTS-第一周/">
+                ARTS 第一周
+              </a>
+            </div>
+
             <div id="article-nav-older" class="article-nav-title">
               <a href="/2018/07/23/算法200题训练02-平衡二叉树/">
                 算法200题训练02-平衡二叉树
@@ -378,10 +393,10 @@
 
           <ol class="toc">
             <li class="toc-item toc-level-4">
-              <a class="toc-link" href="#tcpserver">
+              <a class="toc-link" href="#tcpserver-获取订阅消息">
                 <span class="toc-number">1.</span>
                 <span class="toc-text">
-                  tcpserver</span>
+                  tcpserver 获取订阅消息</span>
               </a>
             </li>
           </ol>
@@ -413,8 +428,8 @@
 
         <div class="scroll" id="post-nav-button">
 
-          <a href="/" title="回到主页">
-            <i class="fa fa-home"></i>
+          <a href="/2019/04/01/ARTS-第一周/" title="上一篇: ARTS 第一周">
+            <i class="fa fa-angle-left"></i>
           </a>
 
           <a title="文章列表">
@@ -429,6 +444,9 @@
         </div>
 
         <ul class="post-list">
+          <li class="post-list-item">
+            <a class="post-list-link" href="/2019/04/01/ARTS-第一周/">ARTS 第一周</a>
+          </li>
           <li class="post-list-item">
             <a class="post-list-link" href="/2019/03/18/Nsq源码学习笔记-二-nsqd消息订阅/">Nsq源码学习笔记(二) --- nsqd消息订阅</a>
           </li>

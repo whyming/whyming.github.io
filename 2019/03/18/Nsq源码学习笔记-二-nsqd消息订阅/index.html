@@ -15,7 +15,7 @@
   <meta name="author" content="whyming">
 
   <meta name="description" content="nsqd.Main内部逻辑很少，启动了6个goroutine，下面简单说一下goroutine的作用    tcpserver，监听客户端连接，很重要，下面消息订阅就是在这里面发生的   httpserver，监听http请求，提供rest api 服务   httpsserver，监听https请求，其实和http的一样   queueScanLoop，应该是监听消息队列的，稍后回来填坑   l">
-  <meta name="keywords" content="go,Nsq,源码学习">
+  <meta name="keywords" content="Nsq,go,源码学习">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Nsq源码学习笔记(二) --- nsqd消息订阅">
   <meta property="og:url" content="http://yoursite.com/2019/03/18/Nsq源码学习笔记-二-nsqd消息订阅/index.html">
@@ -444,6 +444,9 @@
         </div>
 
         <ul class="post-list">
+          <li class="post-list-item">
+            <a class="post-list-link" href="/2019/04/14/ARTS-2/">ARTS-第二周</a>
+          </li>
           <li class="post-list-item">
             <a class="post-list-link" href="/2019/04/01/ARTS-第一周/">ARTS 第一周</a>
           </li>

@@ -295,8 +295,67 @@
       </nav>
 
       <div class="body-wrap">
-        <article id="post-ARTS-第一周" class="article article-type-post" itemscope=""
-                                                                                        itemprop="blogPost">
+        <article id="post-ARTS-2" class="article article-type-post" itemscope="" itemprop="blogPost">
+
+          <div class="article-meta">
+            <a href="/2019/04/14/ARTS-2/" class="article-date">
+              <time datetime="2019-04-14T01:27:30.000Z" itemprop="datePublished">2019-04-14</time>
+            </a>
+
+          </div>
+
+          <div class="article-inner">
+
+            <input type="hidden" class="isFancy">
+
+            <header class="article-header">
+              <h1 itemprop="name">
+                <a class="article-title" href="/2019/04/14/ARTS-2/">ARTS-第二周</a>
+              </h1>
+
+            </header>
+
+            <div class="article-entry" itemprop="articleBody">
+
+              <p>ARTS打卡第二周</p>
+              <p>A: leetcode 3Sum， Midum</p>
+              <p>R：http断点续传协议TUS</p>
+              <p>T: 利用git commit 回滚代码，阅读庞大项目</p>
+              <p>S：go-nats代码阅读</p>
+
+            </div>
+
+            <div class="article-info article-info-index">
+
+              <div class="article-tag tagcloud">
+                <ul class="article-tag-list">
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/ARTS/">ARTS</a>
+                  </li>
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/go/">go</a>
+                  </li>
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/golang/">golang</a>
+                  </li>
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/打卡/">打卡</a>
+                  </li>
+                </ul>
+              </div>
+
+              <p class="article-more-link">
+                <a href="/2019/04/14/ARTS-2/#more">阅读全文 >></a>
+              </p>
+
+              <div class="clearfix"></div>
+            </div>
+
+          </div>
+
+        </article>
+
+        <article id="post-ARTS-第一周" class="article article-type-post" itemscope="" itemprop="blogPost">
 
           <div class="article-meta">
             <a href="/2019/04/01/ARTS-第一周/" class="article-date">
@@ -336,70 +395,6 @@
                   <strong>Share：主要是为了建立你的影响力，能够输出价值观。</strong>分享一篇有观点和思考的技术文章。</p>
                 <p>作者：陈皓</p>
               </blockquote>
-              <h3 id="Algorithm">
-                <a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3>
-              <p>上次写了几个题，这次接着继续主要是easy和medium</p>
-              <p>这次是medium：
-                <a href="https://leetcode.com/problems/string-to-integer-atoi" target="_blank" rel="noopener">字符串转数值</a>
-              </p>
-              <figure class="highlight go">
-                <table>
-                  <tr>
-                    <td class="gutter">
-                      <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre>
-                    </td>
-                    <td class="code">
-                      <pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">myAtoi</span><span class="params">(str <span class="keyword">string</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> (</span><br><span class="line">		isNegative = <span class="number">0</span></span><br><span class="line">		validLen   <span class="keyword">int32</span></span><br><span class="line">		startNum   <span class="keyword">bool</span></span><br><span class="line">		Max        = <span class="number">2</span> &lt;&lt; <span class="number">30</span></span><br><span class="line">		MaxPre     = <span class="number">2</span> &lt;&lt; <span class="number">30</span> / <span class="number">10</span></span><br><span class="line">	)</span><br><span class="line"></span><br><span class="line">	l := <span class="built_in">len</span>(str)</span><br><span class="line">	<span class="keyword">var</span> result <span class="keyword">int</span></span><br><span class="line">LOOP:</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; l; i++ &#123;</span><br><span class="line">		<span class="keyword">switch</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> !startNum &amp;&amp; isNegative == <span class="number">0</span> &amp;&amp; str[i] == <span class="string">' '</span>:</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		<span class="keyword">case</span> !startNum &amp;&amp; isNegative == <span class="number">0</span> &amp;&amp; str[i] == <span class="string">'-'</span>:</span><br><span class="line">			isNegative = <span class="number">-1</span></span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		<span class="keyword">case</span> !startNum &amp;&amp; isNegative == <span class="number">0</span> &amp;&amp; str[i] == <span class="string">'+'</span>:</span><br><span class="line">			isNegative = <span class="number">1</span></span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		<span class="keyword">case</span> str[i] &lt; <span class="string">'0'</span> || str[i] &gt; <span class="string">'9'</span>:</span><br><span class="line">			<span class="keyword">break</span> LOOP</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="keyword">if</span> isNegative == <span class="number">0</span> &#123;</span><br><span class="line">				isNegative = <span class="number">1</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> str[i] == <span class="string">'0'</span> &amp;&amp; result == <span class="number">0</span> &#123;</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			startNum = <span class="literal">true</span></span><br><span class="line">			validLen++</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> validLen &gt; <span class="number">10</span> || result &gt; MaxPre ||</span><br><span class="line">			(result == MaxPre &amp;&amp; (isNegative == <span class="number">1</span> &amp;&amp; str[i] &gt; <span class="string">'7'</span> &amp;&amp; str[i] &lt;= <span class="string">'9'</span> || isNegative == <span class="number">-1</span> &amp;&amp; str[i] == <span class="string">'9'</span>)) &#123;</span><br><span class="line">			<span class="keyword">if</span> isNegative == <span class="number">1</span> &#123;</span><br><span class="line">				result = Max - <span class="number">1</span></span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				result = Max</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		result = result*<span class="number">10</span> + (<span class="keyword">int</span>(str[i]) - <span class="string">'0'</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> isNegative != <span class="number">0</span> &#123;</span><br><span class="line">		result = result * isNegative</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre>
-                    </td>
-                  </tr>
-                </table>
-              </figure>
-              <h3 id="Review">
-                <a href="#Review" class="headerlink" title="Review"></a>Review</h3>
-              <p>英文阅读确实是短板，从简单的入手吧，顺便当作收藏资源</p>
-              <p>
-                <a href="https://blog.usejournal.com/staying-in-the-know-with-go-9bf719ccc3d1" target="_blank"
-                                                                                                rel="noopener">关于go应该知道的一些知识</a>
-              </p>
-              <ul>
-                <li>
-                  <a href="https://golangweekly.com/" target="_blank" rel="noopener">go周报</a>，大家都可以订阅一下，关于go的一些最新消息还有更新、文章、新闻等</li>
-                <li>
-                  <a href="https://groups.google.com/forum/#!forum/golang-nuts" target="_blank" rel="noopener">go邮件列表1</a>，
-                  <a href="https://groups.google.com/d/forum/golang-dev" target="_blank" rel="noopener">go开发者论坛</a>, 都是google自己家的，需要梯子，但是可以看到关于go的最新的讨论和发展</li>
-                <li>第三方论坛：
-                  <a href="https://old.reddit.com/r/golang/" target="_blank" rel="noopener">reddit论坛</a>，</li>
-                <li>博客：
-                  <a href="https://blog.feedspot.com/golang_blogs/" target="_blank" rel="noopener">号称top 20的golang博客的聚合</a>，看上去还不错</li>
-                <li>github 项目：
-                  <a href="https://github.com/search?q=stars%3A%3E1000+language%3AGo+cache&amp;type=Repositories"
-                                                                                                  target="_blank" rel="noopener">千星项目搜索</a>，千应该是受大家认可的项目了</li>
-                <li>GopherCon 开发者大会，这个看情况吧…</li>
-              </ul>
-              <h3 id="Tip">
-                <a href="#Tip" class="headerlink" title="Tip"></a>Tip</h3>
-              <p>刚好在写上面leetcode题的时候发现，go的字符型还是挺有意思的，当我按照下标去访问字符串元素的时候，得到的竟然是
-                <code>uint8</code>，同理，当定义一个字符的时候，其实也是使用了
-                <code>uint8</code>,其值就是对应的ascii码值，这样可以直接进行
-                <code>+-</code>操作，同时比较也很方便。</p>
-              <figure class="highlight go">
-                <table>
-                  <tr>
-                    <td class="gutter">
-                      <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
-                    </td>
-                    <td class="code">
-                      <pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s := <span class="string">"abcd"</span></span><br><span class="line">	tt := reflect.TypeOf(s[<span class="number">0</span>])</span><br><span class="line">	vv := reflect.ValueOf(s[<span class="number">0</span>])</span><br><span class="line">	fmt.Printf(<span class="string">"type is: %v\n"</span>, tt)</span><br><span class="line">	fmt.Printf(<span class="string">"value is: %v\n"</span>, vv)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// type is: uint8</span></span><br><span class="line"><span class="comment">// value is: 97</span></span><br></pre>
-                    </td>
-                  </tr>
-                </table>
-              </figure>
-              <h3 id="Share">
-                <a href="#Share" class="headerlink" title="Share"></a>Share</h3>
-              <p>先分享一篇别人现成的吧</p>
-              <p>
-                <a href="https://mp.weixin.qq.com/s/H6r3EozpiRt5eY-3N_LUjw" target="_blank" rel="noopener">Go高级实践：反射3定律</a>
-              </p>
 
             </div>
 
@@ -418,6 +413,10 @@
                   </li>
                 </ul>
               </div>
+
+              <p class="article-more-link">
+                <a href="/2019/04/01/ARTS-第一周/#more">阅读全文 >></a>
+              </p>
 
               <div class="clearfix"></div>
             </div>
@@ -580,11 +579,22 @@
 
             <div class="article-entry" itemprop="articleBody">
 
-              <p>鉴于官方手册并不是每个方法都给出了example，描述有很多也不是很清楚，所以光从doc是不能完全裂解这个库，还是要动起手来</p>
+              <p>鉴于官方手册并不是每个方法都给出了example，描述有很多也不是很清楚，所以光从doc是不能完全理解这个库，还是要动起手来</p>
 
             </div>
 
             <div class="article-info article-info-index">
+
+              <div class="article-tag tagcloud">
+                <ul class="article-tag-list">
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/go/">go</a>
+                  </li>
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/golang/">golang</a>
+                  </li>
+                </ul>
+              </div>
 
               <p class="article-more-link">
                 <a href="/2018/07/11/Go的反射库reflect学习/#more">阅读全文 >></a>
@@ -848,55 +858,6 @@
 
               <p class="article-more-link">
                 <a href="/2018/06/08/Nsq源码学习笔记（一）----nsqd启动/#more">阅读全文 >></a>
-              </p>
-
-              <div class="clearfix"></div>
-            </div>
-
-          </div>
-
-        </article>
-
-        <article id="post-奇怪的问题记录" class="article article-type-post" itemscope="" itemprop="blogPost">
-
-          <div class="article-meta">
-            <a href="/2018/06/08/奇怪的问题记录/" class="article-date">
-              <time datetime="2018-06-08T02:03:14.000Z" itemprop="datePublished">2018-06-08</time>
-            </a>
-
-          </div>
-
-          <div class="article-inner">
-
-            <input type="hidden" class="isFancy">
-
-            <header class="article-header">
-              <h1 itemprop="name">
-                <a class="article-title" href="/2018/06/08/奇怪的问题记录/">奇怪的问题记录</a>
-              </h1>
-
-            </header>
-
-            <div class="article-entry" itemprop="articleBody">
-
-              <p>一些在工作中遇到的奇怪问题的记录，方便回忆查找
-                <br>
-
-              </p>
-            </div>
-
-            <div class="article-info article-info-index">
-
-              <div class="article-tag tagcloud">
-                <ul class="article-tag-list">
-                  <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="/tags/记录/">记录</a>
-                  </li>
-                </ul>
-              </div>
-
-              <p class="article-more-link">
-                <a href="/2018/06/08/奇怪的问题记录/#more">阅读全文 >></a>
               </p>
 
               <div class="clearfix"></div>

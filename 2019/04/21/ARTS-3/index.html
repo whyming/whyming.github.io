@@ -14,18 +14,17 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="author" content="whyming">
 
-  <meta name="description" content="nsqd.Main内部逻辑很少，启动了6个goroutine，下面简单说一下goroutine的作用    tcpserver，监听客户端连接，很重要，下面消息订阅就是在这里面发生的   httpserver，监听http请求，提供rest api 服务   httpsserver，监听https请求，其实和http的一样   queueScanLoop，应该是监听消息队列的，稍后回来填坑   l">
-  <meta name="keywords" content="go,Nsq,源码学习">
+  <meta name="description" content="ARTS打卡第三周 A:      Letter Combinations of a Phone Number  R:Why you should like sync.Pool T: 利用闭包构构造类型一致的不同错误 S: –">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Nsq源码学习笔记(二) --- nsqd消息订阅">
-  <meta property="og:url" content="http://yoursite.com/2019/03/18/Nsq源码学习笔记-二-nsqd消息订阅/index.html">
+  <meta property="og:title" content="ARTS-第三周">
+  <meta property="og:url" content="http://yoursite.com/2019/04/21/ARTS-3/index.html">
   <meta property="og:site_name" content="Whyming&#39;s Blog">
-  <meta property="og:description" content="nsqd.Main内部逻辑很少，启动了6个goroutine，下面简单说一下goroutine的作用    tcpserver，监听客户端连接，很重要，下面消息订阅就是在这里面发生的   httpserver，监听http请求，提供rest api 服务   httpsserver，监听https请求，其实和http的一样   queueScanLoop，应该是监听消息队列的，稍后回来填坑   l">
+  <meta property="og:description" content="ARTS打卡第三周 A:      Letter Combinations of a Phone Number  R:Why you should like sync.Pool T: 利用闭包构构造类型一致的不同错误 S: –">
   <meta property="og:locale" content="zh-Hans">
-  <meta property="og:updated_time" content="2019-04-19T02:00:18.193Z">
+  <meta property="og:updated_time" content="2019-04-21T14:38:53.330Z">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Nsq源码学习笔记(二) --- nsqd消息订阅">
-  <meta name="twitter:description" content="nsqd.Main内部逻辑很少，启动了6个goroutine，下面简单说一下goroutine的作用    tcpserver，监听客户端连接，很重要，下面消息订阅就是在这里面发生的   httpserver，监听http请求，提供rest api 服务   httpsserver，监听https请求，其实和http的一样   queueScanLoop，应该是监听消息队列的，稍后回来填坑   l">
+  <meta name="twitter:title" content="ARTS-第三周">
+  <meta name="twitter:description" content="ARTS打卡第三周 A:      Letter Combinations of a Phone Number  R:Why you should like sync.Pool T: 利用闭包构构造类型一致的不同错误 S: –">
 
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -44,7 +43,7 @@
 
   <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
-  <title>Nsq源码学习笔记(二) --- nsqd消息订阅 | Whyming&#39;s Blog</title>
+  <title>ARTS-第三周 | Whyming&#39;s Blog</title>
 
   <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -293,12 +292,11 @@
       </nav>
 
       <div class="body-wrap">
-        <article id="post-Nsq源码学习笔记-二-nsqd消息订阅" class="article article-type-post" itemscope=""
-                                                                                        itemprop="blogPost">
+        <article id="post-ARTS-3" class="article article-type-post" itemscope="" itemprop="blogPost">
 
           <div class="article-meta">
-            <a href="/2019/03/18/Nsq源码学习笔记-二-nsqd消息订阅/" class="article-date">
-              <time datetime="2019-03-18T11:46:35.000Z" itemprop="datePublished">2019-03-18</time>
+            <a href="/2019/04/21/ARTS-3/" class="article-date">
+              <time datetime="2019-04-21T13:33:35.000Z" itemprop="datePublished">2019-04-21</time>
             </a>
 
           </div>
@@ -309,63 +307,97 @@
 
             <header class="article-header">
               <h1 class="article-title" itemprop="name">
-                Nsq源码学习笔记(二) --- nsqd消息订阅
+                ARTS-第三周
               </h1>
 
             </header>
 
             <div class="article-info article-info-post">
 
-              <div class="article-tag tagcloud">
-                <ul class="article-tag-list">
-                  <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="/tags/Nsq/">Nsq</a>
-                  </li>
-                  <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="/tags/go/">go</a>
-                  </li>
-                  <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="/tags/源码学习/">源码学习</a>
-                  </li>
-                </ul>
-              </div>
-
               <div class="clearfix"></div>
             </div>
 
             <div class="article-entry" itemprop="articleBody">
 
-              <p>nsqd.Main内部逻辑很少，启动了6个goroutine，下面简单说一下goroutine的作用</p>
-              <ul>
-                <li>tcpserver，监听客户端连接，很重要，下面消息订阅就是在这里面发生的</li>
-                <li>httpserver，监听http请求，提供rest api 服务</li>
-                <li>httpsserver，监听https请求，其实和http的一样</li>
-                <li>queueScanLoop，应该是监听消息队列的，稍后回来填坑</li>
-                <li>lookupLoop ，和nsqlookupd通信的</li>
-                <li>statsdLoop， 状态同步</li>
-              </ul>
-              <h4 id="tcpserver-获取订阅消息">
-                <a href="#tcpserver-获取订阅消息" class="headerlink" title="tcpserver 获取订阅消息"></a>tcpserver 获取订阅消息</h4>
-              <p>连接成功后，立刻读取前4个字节，
-                <code>[ ][ ][V][2]</code>,前两个空格应该是预留，这个是用来判断通信协议版本的，目前只有V2,</p>
-              <p>然后开始
-                <code>prot.IOLoop</code>, 这个是tcpserver最主要的事情了， 里面也主要包含两部分</p>
-              <ul>
-                <li>启动
-                  <code>messagePump</code>,这是一个goroutine，处理消息转发等</li>
-                <li>循环读取client发来的消息，解析成命令并执行，同时还包含了维护心跳</li>
-              </ul>
-              <p>
-                <code>messagePump</code>通过循环读取多个chan来实现消息读取，事件触发，其中就包含对订阅消息的转发</p>
-              <p>当client发送一个
-                <code>SUB topicName Channel</code>给nsqd时， nsqd在检查topic和channel合法性后，会创建一个新的channel，放入
-                <code>subEventChan</code>，
-                <code>messagePump</code>监听并得到这个chan后，会继监听这个chan的消息，一旦这个channel有消息发来，则会将channel的消息转发给client，这样客户端就得到了订阅的消息推送。</p>
-              <p>channel的消息哪来的呢？原来在topic创建channel的时候，同时会把这channel加入topic的channel列表，当top接受到消息的时候，发送给列表中的每一个channel，这样可以实现一个topic，多个订阅channel都能得到消息。</p>
-              <p>另外因为topic在创建channel的时候使用的是
-                <code>getOrCreateChannel</code>从名字看就知道，如果已经存在这个名字的channel则直接返回已经存在的channel，如果不存在才创建。那么如果订阅了一个已经存在的channel，就是说别人也监听了的channel会怎么样呢，这个问题转换成了，如果一个go
-                channel多出代码读取，将随机的的一个读到消息，所以订阅同一个channel的客户端将随机收到消息。听说这样设计是为了实现客户端的均衡，可以让多个客户端随机消费同一个channel
+              <p>ARTS打卡第三周</p>
+              <p>A:
+                <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank"
+                                                                                                rel="noopener">
+                  Letter Combinations of a Phone Number</a>
               </p>
+              <p>R:Why you should like sync.Pool</p>
+              <p>T: 利用闭包构构造类型一致的不同错误</p>
+              <p>S: –</p>
+              <a id="more"></a>
+              <p>[TOC]</p>
+              <h3 id="A-Letter-Combinations-of-a-Phone-Number">
+                <a href="#A-Letter-Combinations-of-a-Phone-Number" class="headerlink" title="A: Letter Combinations of a Phone Number"></a>A: Letter Combinations of a Phone Number</h3>
+              <blockquote>
+                <p>Given a string containing digits from
+                  <code>2-9</code> inclusive, return all possible letter combinations that
+                  the number could represent.</p>
+                <p>A mapping of digit to letters (just like on the telephone buttons)
+                  is given below. Note that 1 does not map to any letters.</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&gt; Input: &quot;23&quot;</span><br><span class="line">&gt; Output: [&quot;ad&quot;, &quot;ae&quot;, &quot;af&quot;, &quot;bd&quot;, &quot;be&quot;, &quot;bf&quot;, &quot;cd&quot;, &quot;ce&quot;, &quot;cf&quot;].</span><br><span class="line">&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+              </blockquote>
+              <p>代码：</p>
+              <figure class="highlight go">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre>
+                    </td>
+                    <td class="code">
+                      <pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">letterCombinations</span><span class="params">(digits <span class="keyword">string</span>)</span> []<span class="title">string</span></span> &#123;</span><br><span class="line">	result := []<span class="keyword">string</span>&#123;&#125;</span><br><span class="line">	m := <span class="keyword">map</span>[<span class="keyword">byte</span>][]<span class="keyword">string</span>&#123;</span><br><span class="line">		<span class="string">'2'</span>: []<span class="keyword">string</span>&#123;<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>&#125;,</span><br><span class="line">		<span class="string">'3'</span>: []<span class="keyword">string</span>&#123;<span class="string">"d"</span>, <span class="string">"e"</span>, <span class="string">"f"</span>&#125;,</span><br><span class="line">		<span class="string">'4'</span>: []<span class="keyword">string</span>&#123;<span class="string">"g"</span>, <span class="string">"h"</span>, <span class="string">"i"</span>&#125;,</span><br><span class="line">		<span class="string">'5'</span>: []<span class="keyword">string</span>&#123;<span class="string">"j"</span>, <span class="string">"k"</span>, <span class="string">"l"</span>&#125;,</span><br><span class="line">		<span class="string">'6'</span>: []<span class="keyword">string</span>&#123;<span class="string">"m"</span>, <span class="string">"n"</span>, <span class="string">"o"</span>&#125;,</span><br><span class="line">		<span class="string">'7'</span>: []<span class="keyword">string</span>&#123;<span class="string">"p"</span>, <span class="string">"q"</span>, <span class="string">"r"</span>, <span class="string">"s"</span>&#125;,</span><br><span class="line">		<span class="string">'8'</span>: []<span class="keyword">string</span>&#123;<span class="string">"t"</span>, <span class="string">"u"</span>, <span class="string">"v"</span>&#125;,</span><br><span class="line">		<span class="string">'9'</span>: []<span class="keyword">string</span>&#123;<span class="string">"w"</span>, <span class="string">"x"</span>, <span class="string">"y"</span>, <span class="string">"z"</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	more := <span class="function"><span class="keyword">func</span><span class="params">(pre <span class="keyword">string</span>, suff <span class="keyword">byte</span>)</span> []<span class="title">string</span></span> &#123;</span><br><span class="line">		r := []<span class="keyword">string</span>&#123;&#125;</span><br><span class="line">		<span class="keyword">if</span> ss, ok := m[suff]; ok &#123;</span><br><span class="line">			<span class="keyword">for</span> _, s := <span class="keyword">range</span> ss &#123;</span><br><span class="line">				r = <span class="built_in">append</span>(r, pre+s)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> r</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _, b := <span class="keyword">range</span> []<span class="keyword">byte</span>(digits) &#123;</span><br><span class="line">		tmp := []<span class="keyword">string</span>&#123;&#125;</span><br><span class="line">		<span class="keyword">if</span> <span class="built_in">len</span>(result) == <span class="number">0</span> &#123;</span><br><span class="line">			tmp = more(<span class="string">""</span>, b)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">for</span> _, r := <span class="keyword">range</span> result &#123;</span><br><span class="line">				tmp = <span class="built_in">append</span>(tmp, more(r, b)...)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		result = tmp</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre>
+                    </td>
+                  </tr>
+                </table>
+              </figure>
+              <p>R:
+                <a href="https://medium.com/@Mnwa/why-you-should-like-sync-pool-2c7960c023ba" target="_blank"
+                                                                                                rel="noopener">Why you should like sync.Pool</a>
+              </p>
+              <p>为什么你应该使用sync.Pool， 他能减少内存的使用</p>
+              <ul>
+                <li>sync.Pool是什么？他是一个临时对象集合，这些对象可以单个被存储和提取</li>
+                <li>sync.Pool用法，需要在使用完成后reset并put back</li>
+                <li>性能测试：
+                  <ul>
+                    <li>bytes.Buffer 44% 性能提升和非常多的内存减少</li>
+                    <li>bufio.Writer, 5倍性能提升，内存减少为1/32</li>
+                    <li>Decoding, 无明显提升，因为hard operation就是硬操作？</li>
+                    <li>gzip， 45倍性能提升，内存降低为1/4982</li>
+                  </ul>
+                </li>
+                <li>结论：如果可以尽量使用sync.Pool，他能提高性能减少内存消耗</li>
+              </ul>
+              <p>T: golang里可以通过闭包创建构造函数，比如创建error</p>
+              <figure class="highlight go">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre>
+                    </td>
+                    <td class="code">
+                      <pre><span class="line"><span class="keyword">type</span> DbError <span class="keyword">struct</span>&#123;</span><br><span class="line">  name <span class="keyword">string</span></span><br><span class="line">  msg <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e DbError)</span> <span class="title">Error</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> fmt.Sprintf(<span class="string">"%s: %s"</span>, e.name, e.message)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">IsDbError</span><span class="params">(e error)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">	_, ok := e.(DbError)</span><br><span class="line">	<span class="keyword">return</span> ok</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewErrorGen</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="title">func</span><span class="params">(<span class="keyword">string</span>, ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(msg <span class="keyword">string</span>, p ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">		<span class="keyword">return</span> DbError&#123;</span><br><span class="line">			name:    name,</span><br><span class="line">			message: fmt.Sprintf(msg, p...),</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
+                    </td>
+                  </tr>
+                </table>
+              </figure>
+              <p>重点就是地下这个
+                <code>NewErrorGen</code>， 可以创建多个维度的不同的error，但又能知道这些error是同一个类型的错误</p>
+              <p>S：后补</p>
 
             </div>
 
@@ -373,15 +405,9 @@
 
           <nav id="article-nav">
 
-            <div id="article-nav-newer" class="article-nav-title">
-              <a href="/2019/04/01/ARTS-第一周/">
-                ARTS 第一周
-              </a>
-            </div>
-
             <div id="article-nav-older" class="article-nav-title">
-              <a href="/2018/07/23/算法200题训练02-平衡二叉树/">
-                算法200题训练02-平衡二叉树
+              <a href="/2019/04/14/ARTS-2/">
+                ARTS-第二周
               </a>
             </div>
 
@@ -392,11 +418,11 @@
           <strong class="toc-title">文章目录</strong>
 
           <ol class="toc">
-            <li class="toc-item toc-level-4">
-              <a class="toc-link" href="#tcpserver-获取订阅消息">
+            <li class="toc-item toc-level-3">
+              <a class="toc-link" href="#A-Letter-Combinations-of-a-Phone-Number">
                 <span class="toc-number">1.</span>
                 <span class="toc-text">
-                  tcpserver 获取订阅消息</span>
+                  A: Letter Combinations of a Phone Number</span>
               </a>
             </li>
           </ol>
@@ -428,8 +454,8 @@
 
         <div class="scroll" id="post-nav-button">
 
-          <a href="/2019/04/01/ARTS-第一周/" title="上一篇: ARTS 第一周">
-            <i class="fa fa-angle-left"></i>
+          <a href="/" title="回到主页">
+            <i class="fa fa-home"></i>
           </a>
 
           <a title="文章列表">
@@ -437,7 +463,7 @@
             <i class="fa fa-times"></i>
           </a>
 
-          <a href="/2018/07/23/算法200题训练02-平衡二叉树/" title="下一篇: 算法200题训练02-平衡二叉树">
+          <a href="/2019/04/14/ARTS-2/" title="下一篇: ARTS-第二周">
             <i class="fa fa-angle-right"></i>
           </a>
 

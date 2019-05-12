@@ -11,11 +11,11 @@
       
         <tags>
             
-            <tag> ARTS </tag>
+            <tag> go </tag>
             
             <tag> golang </tag>
             
-            <tag> go </tag>
+            <tag> ARTS </tag>
             
             <tag> 打卡 </tag>
             
@@ -32,11 +32,11 @@
       
         <tags>
             
-            <tag> ARTS </tag>
+            <tag> go </tag>
             
             <tag> golang </tag>
             
-            <tag> go </tag>
+            <tag> ARTS </tag>
             
             <tag> 打卡 </tag>
             
@@ -51,6 +51,14 @@
       <content type="html"><![CDATA[<p>ARTS打卡第三周</p><p>A:  <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank" rel="noopener">  Letter Combinations of a Phone Number</a></p><p>R:Why you should like sync.Pool</p><p>T: 利用闭包构构造类型一致的不同错误</p><p>S: –</p><a id="more"></a><p>[TOC]</p><h3 id="A-Letter-Combinations-of-a-Phone-Number">  <a href="#A-Letter-Combinations-of-a-Phone-Number" class="headerlink" title="A: Letter Combinations of a Phone Number"></a>A: Letter Combinations of a Phone Number</h3><blockquote>  <p>Given a string containing digits from    <code>2-9</code> inclusive, return all possible letter combinations that the number    could represent.</p>  <p>A mapping of digit to letters (just like on the telephone buttons) is given below.    Note that 1 does not map to any letters.</p>  <figure class="highlight plain">    <table>      <tr>        <td class="gutter">          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>        </td>        <td class="code">          <pre><span class="line">&gt; Input: &quot;23&quot;</span><br><span class="line">&gt; Output: [&quot;ad&quot;, &quot;ae&quot;, &quot;af&quot;, &quot;bd&quot;, &quot;be&quot;, &quot;bf&quot;, &quot;cd&quot;, &quot;ce&quot;, &quot;cf&quot;].</span><br><span class="line">&gt;</span><br></pre>        </td>      </tr>    </table>  </figure></blockquote><p>代码：</p><figure class="highlight go">  <table>    <tr>      <td class="gutter">        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre>      </td>      <td class="code">        <pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">letterCombinations</span><span class="params">(digits <span class="keyword">string</span>)</span> []<span class="title">string</span></span> &#123;</span><br><span class="line">result := []<span class="keyword">string</span>&#123;&#125;</span><br><span class="line">m := <span class="keyword">map</span>[<span class="keyword">byte</span>][]<span class="keyword">string</span>&#123;</span><br><span class="line"><span class="string">'2'</span>: []<span class="keyword">string</span>&#123;<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>&#125;,</span><br><span class="line"><span class="string">'3'</span>: []<span class="keyword">string</span>&#123;<span class="string">"d"</span>, <span class="string">"e"</span>, <span class="string">"f"</span>&#125;,</span><br><span class="line"><span class="string">'4'</span>: []<span class="keyword">string</span>&#123;<span class="string">"g"</span>, <span class="string">"h"</span>, <span class="string">"i"</span>&#125;,</span><br><span class="line"><span class="string">'5'</span>: []<span class="keyword">string</span>&#123;<span class="string">"j"</span>, <span class="string">"k"</span>, <span class="string">"l"</span>&#125;,</span><br><span class="line"><span class="string">'6'</span>: []<span class="keyword">string</span>&#123;<span class="string">"m"</span>, <span class="string">"n"</span>, <span class="string">"o"</span>&#125;,</span><br><span class="line"><span class="string">'7'</span>: []<span class="keyword">string</span>&#123;<span class="string">"p"</span>, <span class="string">"q"</span>, <span class="string">"r"</span>, <span class="string">"s"</span>&#125;,</span><br><span class="line"><span class="string">'8'</span>: []<span class="keyword">string</span>&#123;<span class="string">"t"</span>, <span class="string">"u"</span>, <span class="string">"v"</span>&#125;,</span><br><span class="line"><span class="string">'9'</span>: []<span class="keyword">string</span>&#123;<span class="string">"w"</span>, <span class="string">"x"</span>, <span class="string">"y"</span>, <span class="string">"z"</span>&#125;,</span><br><span class="line">&#125;</span><br><span class="line">more := <span class="function"><span class="keyword">func</span><span class="params">(pre <span class="keyword">string</span>, suff <span class="keyword">byte</span>)</span> []<span class="title">string</span></span> &#123;</span><br><span class="line">r := []<span class="keyword">string</span>&#123;&#125;</span><br><span class="line"><span class="keyword">if</span> ss, ok := m[suff]; ok &#123;</span><br><span class="line"><span class="keyword">for</span> _, s := <span class="keyword">range</span> ss &#123;</span><br><span class="line">r = <span class="built_in">append</span>(r, pre+s)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> r</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _, b := <span class="keyword">range</span> []<span class="keyword">byte</span>(digits) &#123;</span><br><span class="line">tmp := []<span class="keyword">string</span>&#123;&#125;</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(result) == <span class="number">0</span> &#123;</span><br><span class="line">tmp = more(<span class="string">""</span>, b)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="keyword">for</span> _, r := <span class="keyword">range</span> result &#123;</span><br><span class="line">tmp = <span class="built_in">append</span>(tmp, more(r, b)...)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">result = tmp</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre>      </td>    </tr>  </table></figure><p>R:  <a href="https://medium.com/@Mnwa/why-you-should-like-sync-pool-2c7960c023ba" target="_blank" rel="noopener">Why you should like sync.Pool</a></p><p>为什么你应该使用sync.Pool， 他能减少内存的使用</p><ul>  <li>sync.Pool是什么？他是一个临时对象集合，这些对象可以单个被存储和提取</li>  <li>sync.Pool用法，需要在使用完成后reset并put back</li>  <li>性能测试：    <ul>      <li>bytes.Buffer 44% 性能提升和非常多的内存减少</li>      <li>bufio.Writer, 5倍性能提升，内存减少为1/32</li>      <li>Decoding, 无明显提升，因为hard operation就是硬操作？</li>      <li>gzip， 45倍性能提升，内存降低为1/4982</li>    </ul>  </li>  <li>结论：如果可以尽量使用sync.Pool，他能提高性能减少内存消耗</li></ul><p>T: golang里可以通过闭包创建构造函数，比如创建error</p><figure class="highlight go">  <table>    <tr>      <td class="gutter">        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre>      </td>      <td class="code">        <pre><span class="line"><span class="keyword">type</span> DbError <span class="keyword">struct</span>&#123;</span><br><span class="line">  name <span class="keyword">string</span></span><br><span class="line">  msg <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e DbError)</span> <span class="title">Error</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line"><span class="keyword">return</span> fmt.Sprintf(<span class="string">"%s: %s"</span>, e.name, e.message)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">IsDbError</span><span class="params">(e error)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">_, ok := e.(DbError)</span><br><span class="line"><span class="keyword">return</span> ok</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewErrorGen</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="title">func</span><span class="params">(<span class="keyword">string</span>, ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">error</span></span> &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(msg <span class="keyword">string</span>, p ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">error</span></span> &#123;</span><br><span class="line"><span class="keyword">return</span> DbError&#123;</span><br><span class="line">name:    name,</span><br><span class="line">message: fmt.Sprintf(msg, p...),</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre>      </td>    </tr>  </table></figure><p>重点就是地下这个  <code>NewErrorGen</code>， 可以创建多个维度的不同的error，但又能知道这些error是同一个类型的错误</p><p>S：后补</p>]]></content>
       
       
+        <tags>
+            
+            <tag> go </tag>
+            
+            <tag> golang </tag>
+            
+        </tags>
+      
     </entry>
     
     <entry>
@@ -62,11 +70,11 @@
       
         <tags>
             
-            <tag> ARTS </tag>
+            <tag> go </tag>
             
             <tag> golang </tag>
             
-            <tag> go </tag>
+            <tag> ARTS </tag>
             
             <tag> 打卡 </tag>
             
@@ -83,9 +91,9 @@
       
         <tags>
             
-            <tag> ARTS </tag>
-            
             <tag> golang </tag>
+            
+            <tag> ARTS </tag>
             
             <tag> 打卡 </tag>
             
@@ -142,9 +150,9 @@
       
         <tags>
             
-            <tag> golang </tag>
-            
             <tag> go </tag>
+            
+            <tag> golang </tag>
             
         </tags>
       

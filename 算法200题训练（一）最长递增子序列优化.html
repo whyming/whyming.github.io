@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="generator" content="Hexo 3.8.0">
+  <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="author" content="whyming">
+
+  <meta name="description" content="将最长递增子序列的算法复杂度在原来的基础上优化到O(N*logN)">
+  <meta name="keywords" content="go,算法">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="算法200题训练（一）最长递增子序列优化">
+  <meta property="og:url" content="http://blog.whyming.com/算法200题训练（一）最长递增子序列优化.html">
+  <meta property="og:site_name" content="Whyming&#39;s Blog">
+  <meta property="og:description" content="将最长递增子序列的算法复杂度在原来的基础上优化到O(N*logN)">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image" content="https://blog.whyming.com/2018/06/27/%E7%AE%97%E6%B3%95200%E9%A2%98%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%80%EF%BC%89%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/R2.svg">
+  <meta property="og:image" content="http://blog.whyming.com/R0.svg">
+  <meta property="og:image" content="http://blog.whyming.com/R1.svg">
+  <meta property="og:image" content="http://blog.whyming.com/R2.svg">
+  <meta property="og:image" content="http://blog.whyming.com/R3.svg">
+  <meta property="og:image" content="http://blog.whyming.com/R4.svg">
+  <meta property="og:image" content="http://blog.whyming.com/R5.svg">
+  <meta property="og:image" content="http://blog.whyming.com/R6.svg">
+  <meta property="og:image" content="http://blog.whyming.com/R7.svg">
+  <meta property="og:updated_time" content="2018-07-03T09:05:57.000Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="算法200题训练（一）最长递增子序列优化">
+  <meta name="twitter:description" content="将最长递增子序列的算法复杂度在原来的基础上优化到O(N*logN)">
+  <meta name="twitter:image" content="https://blog.whyming.com/2018/06/27/%E7%AE%97%E6%B3%95200%E9%A2%98%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%80%EF%BC%89%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/R2.svg">
+
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="alternate" href="/atom.xml" title="Whyming&#39;s Blog" type="application/atom+xml">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css">
+
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+  <title>算法200题训练（一）最长递增子序列优化 | Whyming&#39;s Blog-算法200题训练（一）最长递增子序列优化--</title>
+
+  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <script>
+    var yiliaConfig = {
+      fancybox: true,
+      animate: true,
+      isHome: false,
+      isPost: true,
+      isArchive: false,
+      isTag: false,
+      isCategory: false,
+      fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+      scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+      search: false
+    }
+
+  </script>
+
+  <script>
+    yiliaConfig.jquery_ui = [false];
+
+  </script>
+
+  <script>
+    yiliaConfig.rootUrl = "\/";
+
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+</html>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+          </a>
+          <hgroup>
+            <h1 class="header-author">
+              <a href="/">whyming</a>
+            </h1>
+          </hgroup>
+
+          <p class="header-subtitle">坚持 积累 总结 升级</p>
+
+          <div id="switch-btn" class="switch-btn">
+            <div class="icon">
+              <div class="icon-ctn">
+                <div class="icon-wrap icon-house" data-idx="0">
+                  <div class="birdhouse"></div>
+                  <div class="birdhouse_holes"></div>
+                </div>
+                <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                  <div class="ribbon"></div>
+                </div>
+
+                <div class="icon-wrap icon-link hide" data-idx="2">
+                  <div class="loopback_l"></div>
+                  <div class="loopback_r"></div>
+                </div>
+
+                <div class="icon-wrap icon-me hide" data-idx="3">
+                  <div class="user"></div>
+                  <div class="shoulder"></div>
+                </div>
+
+              </div>
+
+            </div>
+            <div class="tips-box hide">
+              <div class="tips-arrow"></div>
+              <ul class="tips-inner">
+                <li>菜单</li>
+                <li>标签</li>
+
+                <li>友情链接</li>
+
+                <li>关于我</li>
+
+              </ul>
+            </div>
+          </div>
+
+          <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+              <section class="switch-part switch-part1">
+                <nav class="header-menu">
+                  <ul>
+
+                    <li>
+                      <a href="/">主页</a>
+                    </li>
+
+                    <li>
+                      <a href="/archives/">所有文章</a>
+                    </li>
+
+                    <li>
+                      <a href="/tags/">标签云</a>
+                    </li>
+
+                    <li>
+                      <a href="/about/">关于我</a>
+                    </li>
+
+                  </ul>
+                </nav>
+                <nav class="header-nav">
+                  <ul class="social">
+
+                    <a class="fa Email" href="mailto:whyming@163.com" title="Email"></a>
+
+                    <a class="fa GitHub" href="https://github.com/whyming" title="GitHub"></a>
+
+                  </ul>
+                </nav>
+              </section>
+
+              <section class="switch-part switch-part2">
+                <div class="widget tagcloud" id="js-tagcloud">
+                  <ul class="tag-list">
+                    <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/ARTS/">ARTS</a>
+                    </li>
+                    <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/Nsq/">Nsq</a>
+                    </li>
+                    <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/go/">go</a>
+                    </li>
+                    <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/golang/">golang</a>
+                    </li>
+                    <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/二叉树/">二叉树</a>
+                    </li>
+                    <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/平衡二叉树/">平衡二叉树</a>
+                    </li>
+                    <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/打卡/">打卡</a>
+                    </li>
+                    <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/日常/">日常</a>
+                    </li>
+                    <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/源码学习/">源码学习</a>
+                    </li>
+                    <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/源码阅读/">源码阅读</a>
+                    </li>
+                    <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/算法/">算法</a>
+                    </li>
+                    <li class="tag-list-item">
+                      <a class="tag-list-link" href="/tags/记录/">记录</a>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+
+              <section class="switch-part switch-part3">
+                <div id="js-friends">
+
+                  <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+
+                  <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+
+                  <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+
+                </div>
+              </section>
+
+              <section class="switch-part switch-part4">
+
+                <div id="js-aboutme">专注于前端</div>
+              </section>
+
+            </div>
+          </div>
+        </header>
+      </div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+        <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide">
+            <a href="/" title="回到主页">whyming</a>
+          </h1>
+        </div>
+        <div class="intrude-less">
+          <header id="header" class="inner">
+            <a href="/" class="profilepic">
+              <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author">
+                <a href="/" title="回到主页">whyming</a>
+              </h1>
+            </hgroup>
+
+            <p class="header-subtitle">坚持 积累 总结 升级</p>
+
+            <nav class="header-menu">
+              <ul>
+
+                <li>
+                  <a href="/">主页</a>
+                </li>
+
+                <li>
+                  <a href="/archives/">所有文章</a>
+                </li>
+
+                <li>
+                  <a href="/tags/">标签云</a>
+                </li>
+
+                <li>
+                  <a href="/about/">关于我</a>
+                </li>
+
+                <div class="clearfix"></div>
+              </ul>
+            </nav>
+            <nav class="header-nav">
+              <ul class="social">
+
+                <a class="fa Email" target="_blank" href="mailto:whyming@163.com" title="Email"></a>
+
+                <a class="fa GitHub" target="_blank" href="https://github.com/whyming" title="GitHub"></a>
+
+              </ul>
+            </nav>
+          </header>
+        </div>
+        <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+      </nav>
+
+      <div class="body-wrap">
+        <article id="post-算法200题训练（一）最长递增子序列优化" class="article article-type-post" itemscope=""
+                                                                                        itemprop="blogPost">
+
+          <div class="article-meta">
+            <a href="/算法200题训练（一）最长递增子序列优化.html" class="article-date">
+              <time datetime="2018-07-02T10:05:26.000Z" itemprop="datePublished">2018-07-02</time>
+            </a>
+
+          </div>
+
+          <div class="article-inner">
+
+            <input type="hidden" class="isFancy">
+
+            <header class="article-header">
+              <h1 class="article-title" itemprop="name">
+                算法200题训练（一）最长递增子序列优化
+              </h1>
+
+            </header>
+
+            <div class="article-info article-info-post">
+
+              <div class="article-tag tagcloud">
+                <ul class="article-tag-list">
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/go/">go</a>
+                  </li>
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/算法/">算法</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="article-entry" itemprop="articleBody">
+
+              <p>将最长递增子序列的算法复杂度在原来的基础上优化到O(N*logN)
+                <br>
+                <a id="more"></a>
+              </p>
+              <h3 id="最长递增子序列优化">
+                <a href="#最长递增子序列优化" class="headerlink" title="最长递增子序列优化"></a>最长递增子序列优化</h3>
+              <p>上一篇的
+                <a href="https://blog.whyming.com/2018/06/27/%E7%AE%97%E6%B3%95200%E9%A2%98%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%80%EF%BC%89%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/">最长递增子序列</a>最终实现的时间复杂度为
+                <strong>O(N^2)</strong>，现在将要想办法把时间复杂度降到
+                <strong>O(N*logN)</strong>，且空间复杂度不变。</p>
+              <p>上一篇中从代码可以看出两层的for循环，最外层的N是避免不了的，那么里面那层，却存在优化的可能。让我们复习一下里面的那层循环</p>
+              <figure class="highlight go">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                    </td>
+                    <td class="code">
+                      <pre><span class="line"><span class="keyword">for</span> j, tmp := <span class="keyword">range</span> L[:i] &#123;</span><br><span class="line">	<span class="keyword">if</span> tmp &lt; item &#123;</span><br><span class="line">		R[i] = max(R[i], R[j]+<span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
+                    </td>
+                  </tr>
+                </table>
+              </figure>
+              <p>这层在做什么呢，循环数组i以前的部分，找到比L[i]更小的数，然后去的这些数中最大的那个+1</p>
+              <p>举例
+                <code>L=[2,1,6,4,5,2,7,4]</code>，求R[3]的时候</p>
+              <p>
+                <img src="https://blog.whyming.com/2018/06/27/%E7%AE%97%E6%B3%95200%E9%A2%98%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%80%EF%BC%89%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/R2.svg"
+                                                                                                alt="R3">
+              </p>
+              <p>这是后L[3]=4,比L[0]=2、L[1]=1都大，且R[0]和R[1]都等于1，所以R[3]=2。
+                <br>再深入考虑一下，R[0]和R[1]都是1，那么有必要保存两个吗？如果只保留一个R[0]呢，有什么影响吗？如果只保留一个R[1]有什么影响吗？只保留R[0]不可以，因为当i=5的时候L[5]=2,本来R[5]应该等于2的，这样只能为1了。所以当R中两个数相等的时候只需要保留对应L小的那个，就可以不影响后面的数在这个基础上追加变长，因为有一个小的数保证序列长度了，要一个那么大的数干什么，影响后面的发展啊。</p>
+              <p>同理，
+                <code>R[2]=3,R[3]=2</code>，那么只保留R[3]就可以了，因为
+                <code>L[3]=4 &lt; L[2]=6</code>,想象一下，有一个4结尾的长度为2的序列，谁还想得起6结尾同样长度也是2的，因为不管接下来的是5还是7,4结尾的比6结尾的做的都好。</p>
+              <p>按照这个思路，两个相同的只保留一个，最终得到的R中将不会有重复的数了，R中实际上存储了两个信息，一个是下标i表示
+                <strong>对应到L[i]的数结尾</strong>，具体R的值表示的才是子序列长度。 那么个R表的的意思就是：每一个未删除掉的R[i]表示长度为R[i]的子序列中结尾最小的值为L[i]。比如R[5]=2,表示所有长度为2的最小递增子序列中，结尾最小的最小递增子序列的结尾是L[5]=2</p>
+              <p>这时让我们整理一下R，把那些删除的在最开始就不要插入，同时让i和R[i]的信息对调一下，变成：
+                <strong>R[i]表示的是长度为i的最小递增子序列中，结尾最小的那个序列的结尾是R[i]</strong>
+              </p>
+              <p>下面我们来逐步生成一下R,通过遍历L来逐步更新R,注意R的下标不随L遍历同步增加，为了区分下面用R[j]表示,因为数组的下标是从0开始的，所以我们还需要+1表示长度
+                <br>i=0的时候,只有一个2，所以长度为0+1的子序列的最小结尾为2
+                <br>
+                <img src="./R0.svg" alt="R0">
+              </p>
+              <p>i=1,因为1比2小，不能让子序列变长，所以最长递增子序列长度还是1，这时存在两个最长递增子序列，分别是[2]和[1]，长度都是1，但是[1]的结尾比[2]小，所以更新R[0]=1
+                <br>
+                <img src="./R1.svg" alt="R1">
+              </p>
+              <p>i=2,L[2] = 6, 这时在R中查找小于6的数(而不是在L中)R中只有一个1，意思是目前只存在一个长度为1的最小递增子序列，且结尾为1，因为6&gt;1，所以一定存在一个长度为2，结尾为6的最小递增子序列。
+                <br>
+                <img src="./R2.svg" alt="R2">
+              </p>
+              <p>i=3,L[3]=4，这时还是在R中查找，小于4的值，目前R=[1,6]。1&lt;4, 6&gt;4，所以一定存在一个最长递增子序列的长度为2，结尾为4，这时发现，原来已经存在一个长度为2，结尾为6的，4&lt;6
+                那么这时更新R将长度为2的最长递增子序列的结尾改为4
+                <br>
+                <img src="./R3.svg" alt="R3">
+              </p>
+              <p>i=4,L[4]=5, 因为在R中没有比5大的数，所以一定存在一个更长的递增子序列，且结尾为5。
+                <br>
+                <img src="./R4.svg" alt="R4">
+              </p>
+              <p>i=5,L[5]=2, 在R中R[0]=1
+                <2 ,r[1]="4">2, 所以更新为2，即长度为2的递增子序列，最小结尾为2
+                  <br>
+                  <img src="./R5.svg" alt="R5">
+                </2>
+              </p>
+              <p>i=6,L[6]=7,在R中没有找到比7大的数，最大的是R[2]=5,所以一定存在一个长度为4，结尾为7的递增子序列，R[3]=7,
+                <br>
+                <img src="./R6.svg" alt="R6">
+              </p>
+              <p>i=7,L[7] = 4,第一个比4大的R值就是R[2]=5,所以更新R[2]=4
+                <br>
+                <img src="./R7.svg" alt="R7">
+              </p>
+              <p>最后R值中存在的最后一个数是R[3] = 7，即存在一个长度为3+1=4的递增子序列，且结尾为7</p>
+              <p>那么每次更新或插入R值时的时间复杂度是多少呢？
+                <br>首先我们把上面的过程表达一下：</p>
+              <ul>
+                <li>当L[i]在R中从左到右找到第一个大于等与L[i]的值时，更新R当前下标对应的值为L[i],见：i=1,i=3,i=5,i=7</li>
+                <li>当L[i]在R中不存在比L[i]大的值时，向R后追加新的值，方式时R的下标+1，填入L[i],见：i=2,i=4,i=6</li>
+              </ul>
+              <p>因为R中的数是递增的，所以在R中查找第一个大于L[i]，或者找不到比L[i]大的数都可以用二分法确认，时间复杂度为O(N*logN)</p>
+              <p>为什么R中的数是递增的呢？回想一下R的更新和追加新值时的过程，如果这个值特别大，R中没有比它大的，那么这个值会追加在后面，这时保证了有序性，如果这个值找到了一个比它大的值，注意时从左到右的找到第一个比它大的值，那么更新这个值，意思是左边的一定比它小，右边的一定比它大，还是有序的。</p>
+              <h4 id="代码-ListBetter">
+                <a href="#代码-ListBetter" class="headerlink" title="代码 ListBetter"></a>代码 ListBetter</h4>
+              <figure class="highlight go">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre>
+                    </td>
+                    <td class="code">
+                      <pre><span class="line"><span class="keyword">package</span> LIS</span><br><span class="line"></span><br><span class="line"><span class="comment">// Lis is Longest Increasing Subsequence</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Lis</span><span class="params">(L []<span class="keyword">int</span>)</span> <span class="params">(result <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(L) &lt;= <span class="number">1</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">len</span>(L)</span><br><span class="line">	&#125;</span><br><span class="line">	R := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="built_in">len</span>(L))</span><br><span class="line">	R[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">	result = <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i, item := <span class="keyword">range</span> L &#123;</span><br><span class="line">		<span class="keyword">for</span> j, tmp := <span class="keyword">range</span> L[:i] &#123;</span><br><span class="line">			<span class="keyword">if</span> tmp &lt; item &#123;</span><br><span class="line">				R[i] = max(R[i], R[j]+<span class="number">1</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		result = max(result, R[i])</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a, b <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> a &gt; b &#123;</span><br><span class="line">		<span class="keyword">return</span> a</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ListBetter 时间复杂度为O(N*logN)的最长递增子序列</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ListBetter</span><span class="params">(L []<span class="keyword">int</span>)</span> <span class="params">(result <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(L) &lt;= <span class="number">1</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">len</span>(L)</span><br><span class="line">	&#125;</span><br><span class="line">	R := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="built_in">len</span>(L))</span><br><span class="line">	R[<span class="number">0</span>] = L[<span class="number">0</span>]</span><br><span class="line">	result = <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> _, item := <span class="keyword">range</span> L &#123;</span><br><span class="line">		index := getIndex(R[:result+<span class="number">1</span>], item)</span><br><span class="line">		R[index] = item</span><br><span class="line">		<span class="keyword">if</span> index &gt; result &#123;</span><br><span class="line">			result = index</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result + <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 二分查找第一个大于target的数的下标，如果没有比target大的，返回最后一个数的下标+1即切片长度</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getIndex</span><span class="params">(R []<span class="keyword">int</span>, target <span class="keyword">int</span>)</span> <span class="params">(index <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(R) &lt;= <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> R[<span class="built_in">len</span>(R)<span class="number">-1</span>] &lt; target &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">len</span>(R)</span><br><span class="line">	&#125;</span><br><span class="line">	start := <span class="number">0</span></span><br><span class="line">	end := <span class="built_in">len</span>(R) - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">	i := (start + end) / <span class="number">2</span></span><br><span class="line">	<span class="keyword">for</span> ; i &gt; start; i = (start + end) / <span class="number">2</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> target == R[i] &#123;</span><br><span class="line">			<span class="keyword">return</span> i</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> target &lt; R[i] &#123;</span><br><span class="line">			end = i</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			start = i</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> R[start] &gt; target &#123;</span><br><span class="line">		<span class="keyword">return</span> start</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> end</span><br><span class="line">&#125;</span><br></pre>
+                    </td>
+                  </tr>
+                </table>
+              </figure>
+              <h4 id="UT">
+                <a href="#UT" class="headerlink" title="UT"></a>UT</h4>
+              <figure class="highlight go">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre>
+                    </td>
+                    <td class="code">
+                      <pre><span class="line"><span class="keyword">package</span> LIS</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"testing"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestLis</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	<span class="keyword">type</span> args <span class="keyword">struct</span> &#123;</span><br><span class="line">		s []<span class="keyword">int</span></span><br><span class="line">	&#125;</span><br><span class="line">	tests := []<span class="keyword">struct</span> &#123;</span><br><span class="line">		name       <span class="keyword">string</span></span><br><span class="line">		args       args</span><br><span class="line">		wantResult <span class="keyword">int</span></span><br><span class="line">	&#125;&#123;</span><br><span class="line">		&#123;name: <span class="string">"empty"</span>, args: args&#123;s: []<span class="keyword">int</span>&#123;&#125;&#125;, wantResult: <span class="number">0</span>&#125;,</span><br><span class="line">		&#123;name: <span class="string">"onlyOne"</span>, args: args&#123;s: []<span class="keyword">int</span>&#123;<span class="number">2</span>&#125;&#125;, wantResult: <span class="number">1</span>&#125;,</span><br><span class="line">		&#123;name: <span class="string">"none"</span>, args: args&#123;s: []<span class="keyword">int</span>&#123;<span class="number">6</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>&#125;&#125;, wantResult: <span class="number">1</span>&#125;,</span><br><span class="line">		&#123;name: <span class="string">"full"</span>, args: args&#123;s: []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;&#125;, wantResult: <span class="number">6</span>&#125;,</span><br><span class="line">		&#123;name: <span class="string">"normal"</span>, args: args&#123;s: []<span class="keyword">int</span>&#123;<span class="number">2</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">4</span>&#125;&#125;, wantResult: <span class="number">4</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, tt := <span class="keyword">range</span> tests &#123;</span><br><span class="line">		t.Run(tt.name, <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">			<span class="keyword">if</span> gotResult := Lis(tt.args.s); gotResult != tt.wantResult &#123;</span><br><span class="line">				t.Errorf(<span class="string">"Lis() = %v, want %v"</span>, gotResult, tt.wantResult)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestListBetter</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	<span class="keyword">type</span> args <span class="keyword">struct</span> &#123;</span><br><span class="line">		L []<span class="keyword">int</span></span><br><span class="line">	&#125;</span><br><span class="line">	tests := []<span class="keyword">struct</span> &#123;</span><br><span class="line">		name       <span class="keyword">string</span></span><br><span class="line">		args       args</span><br><span class="line">		wantResult <span class="keyword">int</span></span><br><span class="line">	&#125;&#123;</span><br><span class="line">		&#123;name: <span class="string">"onlyOne"</span>, args: args&#123;L: []<span class="keyword">int</span>&#123;<span class="number">5</span>&#125;&#125;, wantResult: <span class="number">1</span>&#125;,</span><br><span class="line">		&#123;name: <span class="string">"two"</span>, args: args&#123;L: []<span class="keyword">int</span>&#123;<span class="number">4</span>, <span class="number">8</span>&#125;&#125;, wantResult: <span class="number">2</span>&#125;,</span><br><span class="line">		&#123;name: <span class="string">"towButOne"</span>, args: args&#123;L: []<span class="keyword">int</span>&#123;<span class="number">7</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>&#125;&#125;, wantResult: <span class="number">1</span>&#125;,</span><br><span class="line">		&#123;name: <span class="string">"multiNumbers"</span>, args: args&#123;L: []<span class="keyword">int</span>&#123;<span class="number">2</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">4</span>&#125;&#125;, wantResult: <span class="number">4</span>&#125;,</span><br><span class="line">		&#123;name: <span class="string">"multiIncreasing"</span>, args: args&#123;L: []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>&#125;&#125;, wantResult: <span class="number">7</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, tt := <span class="keyword">range</span> tests &#123;</span><br><span class="line">		t.Run(tt.name, <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">			<span class="keyword">if</span> gotResult := ListBetter(tt.args.L); gotResult != tt.wantResult &#123;</span><br><span class="line">				t.Errorf(<span class="string">"ListBetter() = %v, want %v"</span>, gotResult, tt.wantResult)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Test_getIndex</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	<span class="keyword">type</span> args <span class="keyword">struct</span> &#123;</span><br><span class="line">		R      []<span class="keyword">int</span></span><br><span class="line">		target <span class="keyword">int</span></span><br><span class="line">	&#125;</span><br><span class="line">	tests := []<span class="keyword">struct</span> &#123;</span><br><span class="line">		name      <span class="keyword">string</span></span><br><span class="line">		args      args</span><br><span class="line">		wantIndex <span class="keyword">int</span></span><br><span class="line">	&#125;&#123;</span><br><span class="line">		&#123;name: <span class="string">"onlyOneAppend"</span>, args: args&#123;R: []<span class="keyword">int</span>&#123;<span class="number">2</span>&#125;, target: <span class="number">5</span>&#125;, wantIndex: <span class="number">1</span>&#125;,</span><br><span class="line">		&#123;name: <span class="string">"onlyOneReplace"</span>, args: args&#123;R: []<span class="keyword">int</span>&#123;<span class="number">7</span>&#125;, target: <span class="number">5</span>&#125;, wantIndex: <span class="number">0</span>&#125;,</span><br><span class="line">		&#123;name: <span class="string">"multiNumbersFirst"</span>, args: args&#123;R: []<span class="keyword">int</span>&#123;<span class="number">6</span>, <span class="number">7</span>&#125;, target: <span class="number">5</span>&#125;, wantIndex: <span class="number">0</span>&#125;,</span><br><span class="line">		&#123;name: <span class="string">"multiNumbers"</span>, args: args&#123;R: []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">17</span>, <span class="number">19</span>&#125;, target: <span class="number">16</span>&#125;, wantIndex: <span class="number">6</span>&#125;,</span><br><span class="line">		&#123;name: <span class="string">"multiNumbersLitter"</span>, args: args&#123;R: []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">21</span>, <span class="number">35</span>, <span class="number">47</span>&#125;, target: <span class="number">2</span>&#125;, wantIndex: <span class="number">1</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, tt := <span class="keyword">range</span> tests &#123;</span><br><span class="line">		t.Run(tt.name, <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">			<span class="keyword">if</span> gotIndex := getIndex(tt.args.R, tt.args.target); gotIndex != tt.wantIndex &#123;</span><br><span class="line">				t.Errorf(<span class="string">"getIndex() = %v, want %v"</span>, gotIndex, tt.wantIndex)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
+                    </td>
+                  </tr>
+                </table>
+              </figure>
+
+            </div>
+
+          </div>
+
+          <nav id="article-nav">
+
+            <div id="article-nav-newer" class="article-nav-title">
+              <a href="/go知识点收集.html">
+                go知识点收集
+              </a>
+            </div>
+
+            <div id="article-nav-older" class="article-nav-title">
+              <a href="/算法200题训练（一）最长递增子序列.html">
+                算法200题训练（一）最长递增子序列
+              </a>
+            </div>
+
+          </nav>
+
+        </article>
+        <div id="toc" class="toc-article">
+          <strong class="toc-title">文章目录</strong>
+
+          <ol class="toc">
+            <li class="toc-item toc-level-3">
+              <a class="toc-link" href="#最长递增子序列优化">
+                <span class="toc-number">1.</span>
+                <span class="toc-text">
+                  最长递增子序列优化</span>
+              </a>
+              <ol class="toc-child">
+                <li class="toc-item toc-level-4">
+                  <a class="toc-link" href="#代码-ListBetter">
+                    <span class="toc-number">1.1.</span>
+                    <span class="toc-text">
+                      代码 ListBetter</span>
+                  </a>
+                </li>
+                <li class="toc-item toc-level-4">
+                  <a class="toc-link" href="#UT">
+                    <span class="toc-number">1.2.</span>
+                    <span class="toc-text">
+                      UT</span>
+                  </a>
+                </li>
+              </ol>
+            </li>
+          </ol>
+
+        </div>
+        <style>
+          .left-col .switch-btn,
+          .left-col .switch-area {
+            display: none;
+          }
+
+          .toc-level-3 i,
+          .toc-level-3 ol {
+            display: none !important;
+          }
+
+        </style>
+
+        <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+        <script>
+          yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+
+        </script>
+
+        <div class="share">
+
+        </div>
+
+        <div class="scroll" id="post-nav-button">
+
+          <a href="/go知识点收集.html" title="上一篇: go知识点收集">
+            <i class="fa fa-angle-left"></i>
+          </a>
+
+          <a title="文章列表">
+            <i class="fa fa-bars"></i>
+            <i class="fa fa-times"></i>
+          </a>
+
+          <a href="/算法200题训练（一）最长递增子序列.html" title="下一篇: 算法200题训练（一）最长递增子序列">
+            <i class="fa fa-angle-right"></i>
+          </a>
+
+        </div>
+
+        <ul class="post-list">
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-5.html">ARTS-5</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-4.html">ARTS-第四周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-3.html">ARTS-第三周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-2.html">ARTS-第二周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-第一周.html">ARTS 第一周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Nsq源码学习笔记-二-nsqd消息订阅.html">Nsq源码学习笔记(二) --- nsqd消息订阅</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练02-平衡二叉树.html">算法200题训练02-平衡二叉树</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Go的反射库reflect学习.html">Go的反射库reflect学习</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/go知识点收集.html">go知识点收集</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练（一）最长递增子序列优化.html">算法200题训练（一）最长递增子序列优化</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练（一）最长递增子序列.html">算法200题训练（一）最长递增子序列</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练.html">算法200题训练</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Nsq源码学习笔记（一）----nsqd启动.html">Nsq源码学习笔记（一）----nsqd启动</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/奇怪的问题记录.html">奇怪的问题记录</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Mac下使用dokcer搭建开发环境记录.html">Mac下使用dokcer搭建开发环境记录</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/笔记博客开坑.html">笔记博客开坑</a>
+          </li>
+        </ul>
+
+        <script>
+
+
+        </script>
+      </div>
+      <footer id="footer">
+        <div class="outer">
+          <div id="footer-info">
+            <div class="footer-left">
+              <i class="fa fa-copyright"></i>
+              2016-2019 whyming
+            </div>
+            <div class="footer-right">
+              <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a> Theme
+              <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE
+              <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+          </div>
+
+          <div class="visit">
+
+            <span id="busuanzi_container_site_pv" style="display:none">
+              <span id="site-visit" title="本站到访数">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span id="busuanzi_value_site_uv"></span>
+              </span>
+            </span>
+
+            <span>| </span>
+
+            <span id="busuanzi_container_page_pv" style="display:none">
+              <span id="page-visit" title="本页阅读量">
+                <i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i>
+                <span id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+
+          </div>
+
+        </div>
+      </footer>
+
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js">
+
+
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], processEscapes:
+      true, skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      } }); MathJax.Hub.Queue(function() { var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i
+      < all.length; i +=1 ) { all[i].SourceElement().parentNode.className +=' has-jax'
+                                                                                      ; } }); </script>
+
+        <script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+
+        </script>
+
+        <div class="scroll" id="scroll">
+          <a href="#" title="返回顶部">
+            <i class="fa fa-arrow-up"></i>
+          </a>
+          <a href="#comments" onclick="load$hide();" title="查看评论">
+            <i class="fa fa-comments-o"></i>
+          </a>
+          <a href="#footer" title="转到底部">
+            <i class="fa fa-arrow-down"></i>
+          </a>
+        </div>
+
+        <script>
+          // Open in New Window
+          var oOpenInNew = {
+            title: "a.article-title, .article-more-link a",
+            tags: ".article-tag a",
+            archives: ".archive-article-title",
+            miniArchives: "a.post-list-link",
+            friends: "#js-friends a",
+            socail: ".social a"
+          }
+          for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+          }
+
+        </script>
+
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+
+
+        </script>
+
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+
+</html>

@@ -14,13 +14,17 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="author" content="whyming">
 
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Whyming&#39;s Blog">
-  <meta property="og:url" content="http://blog.whyming.com/tags/二叉树/index.html">
+  <meta name="description" content="使用go中遇到的小问题，记录和回顾用">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="go知识点收集">
+  <meta property="og:url" content="http://blog.whyming.com/go知识点收集.html">
   <meta property="og:site_name" content="Whyming&#39;s Blog">
+  <meta property="og:description" content="使用go中遇到的小问题，记录和回顾用">
   <meta property="og:locale" content="zh-Hans">
+  <meta property="og:updated_time" content="2019-04-01T14:37:01.106Z">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Whyming&#39;s Blog">
+  <meta name="twitter:title" content="go知识点收集">
+  <meta name="twitter:description" content="使用go中遇到的小问题，记录和回顾用">
 
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -39,7 +43,7 @@
 
   <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
-  <title>Tag: 二叉树 | Whyming&#39;s Blog---</title>
+  <title>go知识点收集 | Whyming&#39;s Blog-go知识点收集--</title>
 
   <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -49,9 +53,9 @@
       fancybox: true,
       animate: true,
       isHome: false,
-      isPost: false,
+      isPost: true,
       isArchive: false,
-      isTag: true,
+      isTag: false,
       isCategory: false,
       fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
       scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -288,52 +292,199 @@
       </nav>
 
       <div class="body-wrap">
-        <section class="archives-wrap">
-          <div class="archive-year-wrap">
-            <a href="/archives/2018" class="archive-year">2018</a>
-          </div>
-          <div class="archives">
+        <article id="post-go知识点收集" class="article article-type-post" itemscope="" itemprop="blogPost">
 
-            <article class="archive-article archive-type-post">
-              <div class="archive-article-inner">
-                <header class="archive-article-header">
-                  <div class="article-meta">
-                    <a href="/算法200题训练02-平衡二叉树.html" class="archive-article-date">
-                      <time datetime="2018-07-23T03:33:22.000Z" itemprop="datePublished">07-23</time>
-                    </a>
-
-                  </div>
-                  <h1 itemprop="name">
-                    <a class="archive-article-title" href="/算法200题训练02-平衡二叉树.html">算法200题训练02-平衡二叉树</a>
-                  </h1>
-
-                  <div class="article-info info-on-archive">
-
-                    <div class="article-tag tagcloud">
-                      <ul class="article-tag-list">
-                        <li class="article-tag-list-item">
-                          <a class="article-tag-list-link" href="/tags/go/">go</a>
-                        </li>
-                        <li class="article-tag-list-item">
-                          <a class="article-tag-list-link" href="/tags/二叉树/">二叉树</a>
-                        </li>
-                        <li class="article-tag-list-item">
-                          <a class="article-tag-list-link" href="/tags/平衡二叉树/">平衡二叉树</a>
-                        </li>
-                        <li class="article-tag-list-item">
-                          <a class="article-tag-list-link" href="/tags/算法/">算法</a>
-                        </li>
-                      </ul>
-                    </div>
-
-                  </div>
-                  <div class="clearfix"></div>
-                </header>
-              </div>
-            </article>
+          <div class="article-meta">
+            <a href="/go知识点收集.html" class="article-date">
+              <time datetime="2018-07-04T03:51:28.000Z" itemprop="datePublished">2018-07-04</time>
+            </a>
 
           </div>
-        </section>
+
+          <div class="article-inner">
+
+            <input type="hidden" class="isFancy">
+
+            <header class="article-header">
+              <h1 class="article-title" itemprop="name">
+                go知识点收集
+              </h1>
+
+            </header>
+
+            <div class="article-info article-info-post">
+
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="article-entry" itemprop="articleBody">
+
+              <p>使用go中遇到的小问题，记录和回顾用
+                <br>
+                <a id="more"></a>
+              </p>
+              <h3 id="知识点记录">
+                <a href="#知识点记录" class="headerlink" title="知识点记录"></a>知识点记录</h3>
+              <h4 id="用切片的指针取值时报错">
+                <a href="#用切片的指针取值时报错" class="headerlink" title="用切片的指针取值时报错"></a>用切片的指针取值时报错</h4>
+              <figure class="highlight go">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                    </td>
+                    <td class="code">
+                      <pre><span class="line">a := &amp;[]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">b := *a[<span class="number">0</span>] <span class="comment">// 这里说不能通过指针对应索引的值</span></span><br></pre>
+                    </td>
+                  </tr>
+                </table>
+              </figure>
+              <p>其实这时一个优先级的问题，我开始认为的事优先得到
+                <code>*a</code>然后取对应的0，但是取索引对应的值优先级更高
+                <code>a[0]</code>，这时就不对了</p>
+              <p>
+                <code>(*a)[0]</code>这样就OK了</p>
+
+            </div>
+
+          </div>
+
+          <nav id="article-nav">
+
+            <div id="article-nav-newer" class="article-nav-title">
+              <a href="/Go的反射库reflect学习.html">
+                Go的反射库reflect学习
+              </a>
+            </div>
+
+            <div id="article-nav-older" class="article-nav-title">
+              <a href="/算法200题训练（一）最长递增子序列优化.html">
+                算法200题训练（一）最长递增子序列优化
+              </a>
+            </div>
+
+          </nav>
+
+        </article>
+        <div id="toc" class="toc-article">
+          <strong class="toc-title">文章目录</strong>
+
+          <ol class="toc">
+            <li class="toc-item toc-level-3">
+              <a class="toc-link" href="#知识点记录">
+                <span class="toc-number">1.</span>
+                <span class="toc-text">
+                  知识点记录</span>
+              </a>
+              <ol class="toc-child">
+                <li class="toc-item toc-level-4">
+                  <a class="toc-link" href="#用切片的指针取值时报错">
+                    <span class="toc-number">1.1.</span>
+                    <span class="toc-text">
+                      用切片的指针取值时报错</span>
+                  </a>
+                </li>
+              </ol>
+            </li>
+          </ol>
+
+        </div>
+        <style>
+          .left-col .switch-btn,
+          .left-col .switch-area {
+            display: none;
+          }
+
+          .toc-level-3 i,
+          .toc-level-3 ol {
+            display: none !important;
+          }
+
+        </style>
+
+        <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+        <script>
+          yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+
+        </script>
+
+        <div class="share">
+
+        </div>
+
+        <div class="scroll" id="post-nav-button">
+
+          <a href="/Go的反射库reflect学习.html" title="上一篇: Go的反射库reflect学习">
+            <i class="fa fa-angle-left"></i>
+          </a>
+
+          <a title="文章列表">
+            <i class="fa fa-bars"></i>
+            <i class="fa fa-times"></i>
+          </a>
+
+          <a href="/算法200题训练（一）最长递增子序列优化.html" title="下一篇: 算法200题训练（一）最长递增子序列优化">
+            <i class="fa fa-angle-right"></i>
+          </a>
+
+        </div>
+
+        <ul class="post-list">
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-5.html">ARTS-5</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-4.html">ARTS-第四周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-3.html">ARTS-第三周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-2.html">ARTS-第二周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-第一周.html">ARTS 第一周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Nsq源码学习笔记-二-nsqd消息订阅.html">Nsq源码学习笔记(二) --- nsqd消息订阅</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练02-平衡二叉树.html">算法200题训练02-平衡二叉树</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Go的反射库reflect学习.html">Go的反射库reflect学习</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/go知识点收集.html">go知识点收集</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练（一）最长递增子序列优化.html">算法200题训练（一）最长递增子序列优化</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练（一）最长递增子序列.html">算法200题训练（一）最长递增子序列</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练.html">算法200题训练</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Nsq源码学习笔记（一）----nsqd启动.html">Nsq源码学习笔记（一）----nsqd启动</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/奇怪的问题记录.html">奇怪的问题记录</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Mac下使用dokcer搭建开发环境记录.html">Mac下使用dokcer搭建开发环境记录</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/笔记博客开坑.html">笔记博客开坑</a>
+          </li>
+        </ul>
+
+        <script>
+
+
+        </script>
       </div>
       <footer id="footer">
         <div class="outer">

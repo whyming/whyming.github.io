@@ -14,13 +14,18 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="author" content="whyming">
 
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Whyming&#39;s Blog">
-  <meta property="og:url" content="http://blog.whyming.com/tags/二叉树/index.html">
+  <meta name="description" content="一些在工作中遇到的奇怪问题的记录，方便回忆查找">
+  <meta name="keywords" content="记录">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="奇怪的问题记录">
+  <meta property="og:url" content="http://blog.whyming.com/奇怪的问题记录.html">
   <meta property="og:site_name" content="Whyming&#39;s Blog">
+  <meta property="og:description" content="一些在工作中遇到的奇怪问题的记录，方便回忆查找">
   <meta property="og:locale" content="zh-Hans">
+  <meta property="og:updated_time" content="2018-06-08T02:23:43.000Z">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Whyming&#39;s Blog">
+  <meta name="twitter:title" content="奇怪的问题记录">
+  <meta name="twitter:description" content="一些在工作中遇到的奇怪问题的记录，方便回忆查找">
 
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -39,7 +44,7 @@
 
   <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
-  <title>Tag: 二叉树 | Whyming&#39;s Blog---</title>
+  <title>奇怪的问题记录 | Whyming&#39;s Blog-奇怪的问题记录--</title>
 
   <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -49,9 +54,9 @@
       fancybox: true,
       animate: true,
       isHome: false,
-      isPost: false,
+      isPost: true,
       isArchive: false,
-      isTag: true,
+      isTag: false,
       isCategory: false,
       fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
       scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -288,52 +293,193 @@
       </nav>
 
       <div class="body-wrap">
-        <section class="archives-wrap">
-          <div class="archive-year-wrap">
-            <a href="/archives/2018" class="archive-year">2018</a>
+        <article id="post-奇怪的问题记录" class="article article-type-post" itemscope="" itemprop="blogPost">
+
+          <div class="article-meta">
+            <a href="/奇怪的问题记录.html" class="article-date">
+              <time datetime="2018-06-08T02:03:14.000Z" itemprop="datePublished">2018-06-08</time>
+            </a>
+
           </div>
-          <div class="archives">
 
-            <article class="archive-article archive-type-post">
-              <div class="archive-article-inner">
-                <header class="archive-article-header">
-                  <div class="article-meta">
-                    <a href="/算法200题训练02-平衡二叉树.html" class="archive-article-date">
-                      <time datetime="2018-07-23T03:33:22.000Z" itemprop="datePublished">07-23</time>
-                    </a>
+          <div class="article-inner">
 
-                  </div>
-                  <h1 itemprop="name">
-                    <a class="archive-article-title" href="/算法200题训练02-平衡二叉树.html">算法200题训练02-平衡二叉树</a>
-                  </h1>
+            <input type="hidden" class="isFancy">
 
-                  <div class="article-info info-on-archive">
+            <header class="article-header">
+              <h1 class="article-title" itemprop="name">
+                奇怪的问题记录
+              </h1>
 
-                    <div class="article-tag tagcloud">
-                      <ul class="article-tag-list">
-                        <li class="article-tag-list-item">
-                          <a class="article-tag-list-link" href="/tags/go/">go</a>
-                        </li>
-                        <li class="article-tag-list-item">
-                          <a class="article-tag-list-link" href="/tags/二叉树/">二叉树</a>
-                        </li>
-                        <li class="article-tag-list-item">
-                          <a class="article-tag-list-link" href="/tags/平衡二叉树/">平衡二叉树</a>
-                        </li>
-                        <li class="article-tag-list-item">
-                          <a class="article-tag-list-link" href="/tags/算法/">算法</a>
-                        </li>
-                      </ul>
-                    </div>
+            </header>
 
-                  </div>
-                  <div class="clearfix"></div>
-                </header>
+            <div class="article-info article-info-post">
+
+              <div class="article-tag tagcloud">
+                <ul class="article-tag-list">
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/记录/">记录</a>
+                  </li>
+                </ul>
               </div>
-            </article>
+
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="article-entry" itemprop="articleBody">
+
+              <p>一些在工作中遇到的奇怪问题的记录，方便回忆查找
+                <br>
+                <a id="more"></a>
+              </p>
+              <h3 id="Mac-OS-X-下目录名大小写不敏感问题">
+                <a href="#Mac-OS-X-下目录名大小写不敏感问题" class="headerlink" title="Mac OS X 下目录名大小写不敏感问题"></a>Mac OS X 下目录名大小写不敏感问题</h3>
+              <p>在Terminal里，
+                <code>cd</code> 命令可以进入一个忽略大小写的目录，比如我有一个目录，
+                <code>~/Go</code>,我可以
+                <code>cd ~/Go</code>,也可以
+                <code>cd ~/go</code>，实际上这两个命令进入的是同一个目录。进而发现Mac默认文件和目录是不区分大小写的（这个有点反*inux），但是多数程序是关系区分大小写的。所以就出现问题了。</p>
+              <p>在一个Nsq的项目里使用的vendor作依赖管理，用dep也已经下载好了，但是test通不过，build也不行，说找不到package，而且从错误信息上看，只搜索了GOPATH和GOROOT，检查vendor目录，依赖包都在，怎么也找不到原因，最后猜测可能和目录大小写有关，因为之前是
+                <code>cd go</code>而目录名是Go，这次
+                <code>cd Go</code>然后逐层进入，再次test，果然好了</p>
+              <blockquote>
+                <p>总结：OS X 默认不区分大小写，在Terminal使用的时候要注意目录名称，或者统一使用小写避免问题，另外可以新建一个大小写敏感的分区</p>
+              </blockquote>
+              <p>
+                <a href="http://blog.bihe0832.com/mac-disk-utility.html" target="_blank" rel="noopener">OS X 中设置大小写敏感的分区并切换</a>
+              </p>
+
+            </div>
 
           </div>
-        </section>
+
+          <nav id="article-nav">
+
+            <div id="article-nav-newer" class="article-nav-title">
+              <a href="/Nsq源码学习笔记（一）----nsqd启动.html">
+                Nsq源码学习笔记（一）----nsqd启动
+              </a>
+            </div>
+
+            <div id="article-nav-older" class="article-nav-title">
+              <a href="/Mac下使用dokcer搭建开发环境记录.html">
+                Mac下使用dokcer搭建开发环境记录
+              </a>
+            </div>
+
+          </nav>
+
+        </article>
+        <div id="toc" class="toc-article">
+          <strong class="toc-title">文章目录</strong>
+
+          <ol class="toc">
+            <li class="toc-item toc-level-3">
+              <a class="toc-link" href="#Mac-OS-X-下目录名大小写不敏感问题">
+                <span class="toc-number">1.</span>
+                <span class="toc-text">
+                  Mac OS X 下目录名大小写不敏感问题</span>
+              </a>
+            </li>
+          </ol>
+
+        </div>
+        <style>
+          .left-col .switch-btn,
+          .left-col .switch-area {
+            display: none;
+          }
+
+          .toc-level-3 i,
+          .toc-level-3 ol {
+            display: none !important;
+          }
+
+        </style>
+
+        <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+        <script>
+          yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+
+        </script>
+
+        <div class="share">
+
+        </div>
+
+        <div class="scroll" id="post-nav-button">
+
+          <a href="/Nsq源码学习笔记（一）----nsqd启动.html" title="上一篇: Nsq源码学习笔记（一）----nsqd启动">
+            <i class="fa fa-angle-left"></i>
+          </a>
+
+          <a title="文章列表">
+            <i class="fa fa-bars"></i>
+            <i class="fa fa-times"></i>
+          </a>
+
+          <a href="/Mac下使用dokcer搭建开发环境记录.html" title="下一篇: Mac下使用dokcer搭建开发环境记录">
+            <i class="fa fa-angle-right"></i>
+          </a>
+
+        </div>
+
+        <ul class="post-list">
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-5.html">ARTS-5</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-4.html">ARTS-第四周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-3.html">ARTS-第三周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-2.html">ARTS-第二周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-第一周.html">ARTS 第一周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Nsq源码学习笔记-二-nsqd消息订阅.html">Nsq源码学习笔记(二) --- nsqd消息订阅</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练02-平衡二叉树.html">算法200题训练02-平衡二叉树</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Go的反射库reflect学习.html">Go的反射库reflect学习</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/go知识点收集.html">go知识点收集</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练（一）最长递增子序列优化.html">算法200题训练（一）最长递增子序列优化</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练（一）最长递增子序列.html">算法200题训练（一）最长递增子序列</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练.html">算法200题训练</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Nsq源码学习笔记（一）----nsqd启动.html">Nsq源码学习笔记（一）----nsqd启动</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/奇怪的问题记录.html">奇怪的问题记录</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Mac下使用dokcer搭建开发环境记录.html">Mac下使用dokcer搭建开发环境记录</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/笔记博客开坑.html">笔记博客开坑</a>
+          </li>
+        </ul>
+
+        <script>
+
+
+        </script>
       </div>
       <footer id="footer">
         <div class="outer">

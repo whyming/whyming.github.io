@@ -14,14 +14,18 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="author" content="whyming">
 
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="tags">
-  <meta property="og:url" content="http://blog.whyming.com/tags/index.html">
+  <meta name="description" content="A:   Swap Nodes in Pairs  R:   Compile-time DI vs. Run-time DI  T:   jq 工具使用  S:">
+  <meta name="keywords" content="ARTS,golang,go,打卡">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="ARTS-第四周">
+  <meta property="og:url" content="http://blog.whyming.com/ARTS-4.html">
   <meta property="og:site_name" content="Whyming&#39;s Blog">
+  <meta property="og:description" content="A:   Swap Nodes in Pairs  R:   Compile-time DI vs. Run-time DI  T:   jq 工具使用  S:">
   <meta property="og:locale" content="zh-Hans">
-  <meta property="og:updated_time" content="2018-06-01T03:02:43.000Z">
+  <meta property="og:updated_time" content="2019-05-06T02:14:20.805Z">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="tags">
+  <meta name="twitter:title" content="ARTS-第四周">
+  <meta name="twitter:description" content="A:   Swap Nodes in Pairs  R:   Compile-time DI vs. Run-time DI  T:   jq 工具使用  S:">
 
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -40,7 +44,7 @@
 
   <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
-  <title>tags | Whyming&#39;s Blog-tags--</title>
+  <title>ARTS-第四周 | Whyming&#39;s Blog-ARTS-第四周--</title>
 
   <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -50,7 +54,7 @@
       fancybox: true,
       animate: true,
       isHome: false,
-      isPost: false,
+      isPost: true,
       isArchive: false,
       isTag: false,
       isCategory: false,
@@ -289,11 +293,11 @@
       </nav>
 
       <div class="body-wrap">
-        <article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <article id="post-ARTS-4" class="article article-type-post" itemscope="" itemprop="blogPost">
 
           <div class="article-meta">
-            <a href="/tags/index.html" class="article-date">
-              <time datetime="2018-06-01T03:02:43.000Z" itemprop="datePublished">2018-06-01</time>
+            <a href="/ARTS-4.html" class="article-date">
+              <time datetime="2019-05-05T06:43:37.000Z" itemprop="datePublished">2019-05-05</time>
             </a>
 
           </div>
@@ -304,164 +308,247 @@
 
             <header class="article-header">
               <h1 class="article-title" itemprop="name">
-                tags
+                ARTS-第四周
               </h1>
 
             </header>
 
             <div class="article-info article-info-post">
 
+              <div class="article-tag tagcloud">
+                <ul class="article-tag-list">
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/ARTS/">ARTS</a>
+                  </li>
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/go/">go</a>
+                  </li>
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/golang/">golang</a>
+                  </li>
+                  <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="/tags/打卡/">打卡</a>
+                  </li>
+                </ul>
+              </div>
+
               <div class="clearfix"></div>
             </div>
 
             <div class="article-entry" itemprop="articleBody">
 
-              <style>
-                .article-meta {
-                  display: none;
-                }
-
-                #container .article .article-title {
-                  padding-right: 0;
-                }
-
-                .article-header {
-                  padding: 0;
-                  padding-top: 26px;
-                  border-left: none;
-                  text-align: center;
-                }
-
-                .article-header:hover {
-                  border-left: none;
-                }
-
-                .article-title {
-                  font-size: 1.6em
-                }
-
-                .article-entry hr {
-                  margin: 0;
-                }
-
-                .article-meta,
-                #container .article-info-post.article-info {
-                  display: none;
-                }
-
-                #container .article .article-title {
-                  padding: 0;
-                }
-
-              </style>
-
-              <!-- Tag Cloud Page -->
-              <hr>
-              <br>
-
-              <p class="count"></p>
-
-              <div class="tags">
-                <a href="/tags/ARTS/" style="font-size: 25.5px; color: #404040">ARTS</a>
-                <a href="/tags/Nsq/" style="font-size: 20.75px; color: #606060">Nsq</a>
-                <a href="/tags/go/" style="font-size: 35px; color: #000">go</a>
-                <a href="/tags/golang/" style="font-size: 30.25px; color: #202020">golang</a>
-                <a href="/tags/二叉树/" style="font-size: 16px; color: #808080">二叉树</a>
-                <a href="/tags/平衡二叉树/" style="font-size: 16px; color: #808080">平衡二叉树</a>
-                <a href="/tags/打卡/" style="font-size: 25.5px; color: #404040">打卡</a>
-                <a href="/tags/日常/" style="font-size: 20.75px; color: #606060">日常</a>
-                <a href="/tags/源码学习/" style="font-size: 16px; color: #808080">源码学习</a>
-                <a href="/tags/源码阅读/" style="font-size: 16px; color: #808080">源码阅读</a>
-                <a href="/tags/算法/" style="font-size: 25.5px; color: #404040">算法</a>
-                <a href="/tags/记录/" style="font-size: 20.75px; color: #606060">记录</a>
-              </div>
-              <style>
-                .category-list li {
-                  display: inline-block;
-                  margin: 0 1em .5em 0;
-                  padding: 4px;
-                  border: 1px solid lightgray;
-                  font-size: 1.2rem;
-                }
-
-                .category-list a {
-                  color: gray;
-                }
-
-                .category-list-item:hover a {
-                  color: gray;
-                  text-decoration: none;
-                }
-
-                .category-list-count {
-                  margin-left: 2px;
-                  font-size: .9rem;
-                }
-
-                .article-entry ul li:before {
-                  display: none;
-                }
-
-                .article-inner {
-                  text-align: center;
-                }
-
-                .tags {
-                  max-width: 42em;
-                  margin: 2em auto;
-                  margin-top: 0em;
-                }
-
-                .tags a {
-                  margin-right: 1em;
-                  line-height: 65px;
-                  border-bottom: 1px solid gray;
-                  white-space: nowrap;
-                  transition: border-bottom .5s;
-                }
-
-                .tags a:hover {
-                  border-bottom: 3px dotted gray;
-                  text-decoration: none;
-                }
-
-                #count>span {
-                  margin: auto .2em;
-                  font-weight: bold;
-                }
-
-              </style>
-
-              <!-- Count tags and categories -->
-              <p id="count">
-                已有
-                <span>
-                  <script>
-                    document.write($(".category-list-item").length)
-
-                  </script>
-                </span>个分类， 共计
-                <span>
-                  <script>
-                    document.write($(".tags > a").length)
-
-                  </script>
-                </span>个标签
+              <p>A:
+                <a href="https://leetcode.com/problems/swap-nodes-in-pairs/" target="_blank" rel="noopener">Swap Nodes in Pairs</a>
               </p>
-              <script>
-                $('#count').appendTo('.count');
-
-              </script>
+              <p>R:
+                <a href="https://dimes.github.io/blog/compile-time-di-vs-run-time-di" target="_blank"
+                                                                                                rel="noopener">Compile-time DI vs. Run-time DI</a>
+              </p>
+              <p>T:
+                <a href="./#T: jq 工具使用">jq 工具使用</a>
+              </p>
+              <p>S:</p>
+              <a id="more"></a>
+              <h3 id="A-Swap-Nodes-in-Pairs">
+                <a href="#A-Swap-Nodes-in-Pairs" class="headerlink" title="A: Swap Nodes in Pairs"></a>A: Swap Nodes in Pairs</h3>
+              <blockquote>
+                <p>Given a linked list, swap every two adjacent nodes and return its
+                  head.</p>
+                <p>You may
+                  <strong>not</strong> modify the values in the list’s nodes, only nodes
+                  itself may be changed.
+                </p>
+                <p>
+                  <strong>Example:</strong>
+                </p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&gt;Given 1-&gt;2-&gt;3-&gt;4, you should return the list as 2-&gt;1-&gt;4-&gt;3.</span><br><span class="line">&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+              </blockquote>
+              <figure class="highlight go">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre>
+                    </td>
+                    <td class="code">
+                      <pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">swapPairs</span><span class="params">(head *ListNode)</span> *<span class="title">ListNode</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> head == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> head.Next == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> head</span><br><span class="line">	&#125;</span><br><span class="line">	result := head.Next</span><br><span class="line">	<span class="keyword">var</span> last *ListNode</span><br><span class="line">	<span class="keyword">for</span> curr := head; curr != <span class="literal">nil</span> &amp;&amp; curr.Next != <span class="literal">nil</span>; curr = curr.Next &#123;</span><br><span class="line">		<span class="keyword">if</span> last != <span class="literal">nil</span> &#123;</span><br><span class="line">			last.Next = curr.Next</span><br><span class="line">		&#125;</span><br><span class="line">		after := curr.Next.Next</span><br><span class="line">		curr.Next.Next = curr</span><br><span class="line">		curr.Next = after</span><br><span class="line">		last = curr</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre>
+                    </td>
+                  </tr>
+                </table>
+              </figure>
+              <h3 id="R-Compile-time-DI-vs-Run-time-DI">
+                <a href="#R-Compile-time-DI-vs-Run-time-DI" class="headerlink" title="R: Compile-time DI vs. Run-time DI"></a>R:
+                <a href="https://dimes.github.io/blog/compile-time-di-vs-run-time-di" target="_blank"
+                                                                                                rel="noopener">Compile-time DI vs. Run-time DI</a>
+              </h3>
+              <p>依赖注入</p>
+              <h3 id="T-jq-工具使用">
+                <a href="#T-jq-工具使用" class="headerlink" title="T: jq 工具使用"></a>T: jq 工具使用</h3>
+              <p>jq是一款处理json的工具，用于命令行，支持复杂json的解析和处理，甚至可以加入一些编程性的操作，比如求和、map等</p>
+              <p>
+                <a href="https://stedolan.github.io/jq/" target="_blank" rel="noopener">下载地址</a>
+              </p>
+              <h3 id="S">
+                <a href="#S" class="headerlink" title="S:"></a>S:</h3>
 
             </div>
 
           </div>
 
+          <nav id="article-nav">
+
+            <div id="article-nav-newer" class="article-nav-title">
+              <a href="/ARTS-5.html">
+                ARTS-5
+              </a>
+            </div>
+
+            <div id="article-nav-older" class="article-nav-title">
+              <a href="/ARTS-3.html">
+                ARTS-第三周
+              </a>
+            </div>
+
+          </nav>
+
         </article>
+        <div id="toc" class="toc-article">
+          <strong class="toc-title">文章目录</strong>
+
+          <ol class="toc">
+            <li class="toc-item toc-level-3">
+              <a class="toc-link" href="#A-Swap-Nodes-in-Pairs">
+                <span class="toc-number">1.</span>
+                <span class="toc-text">
+                  A: Swap Nodes in Pairs</span>
+              </a>
+            </li>
+            <li class="toc-item toc-level-3">
+              <a class="toc-link" href="#R-Compile-time-DI-vs-Run-time-DI">
+                <span class="toc-number">2.</span>
+                <span class="toc-text">
+                  R: Compile-time DI vs. Run-time DI
+                </span>
+              </a>
+            </li>
+            <li class="toc-item toc-level-3">
+              <a class="toc-link" href="#T-jq-工具使用">
+                <span class="toc-number">3.</span>
+                <span class="toc-text">
+                  T: jq 工具使用</span>
+              </a>
+            </li>
+            <li class="toc-item toc-level-3">
+              <a class="toc-link" href="#S">
+                <span class="toc-number">4.</span>
+                <span class="toc-text">
+                  S:</span>
+              </a>
+            </li>
+          </ol>
+
+        </div>
+        <style>
+          .left-col .switch-btn,
+          .left-col .switch-area {
+            display: none;
+          }
+
+          .toc-level-3 i,
+          .toc-level-3 ol {
+            display: none !important;
+          }
+
+        </style>
+
+        <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+        <script>
+          yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+
+        </script>
 
         <div class="share">
 
         </div>
+
+        <div class="scroll" id="post-nav-button">
+
+          <a href="/ARTS-5.html" title="上一篇: ARTS-5">
+            <i class="fa fa-angle-left"></i>
+          </a>
+
+          <a title="文章列表">
+            <i class="fa fa-bars"></i>
+            <i class="fa fa-times"></i>
+          </a>
+
+          <a href="/ARTS-3.html" title="下一篇: ARTS-第三周">
+            <i class="fa fa-angle-right"></i>
+          </a>
+
+        </div>
+
+        <ul class="post-list">
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-5.html">ARTS-5</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-4.html">ARTS-第四周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-3.html">ARTS-第三周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-2.html">ARTS-第二周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/ARTS-第一周.html">ARTS 第一周</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Nsq源码学习笔记-二-nsqd消息订阅.html">Nsq源码学习笔记(二) --- nsqd消息订阅</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练02-平衡二叉树.html">算法200题训练02-平衡二叉树</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Go的反射库reflect学习.html">Go的反射库reflect学习</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/go知识点收集.html">go知识点收集</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练（一）最长递增子序列优化.html">算法200题训练（一）最长递增子序列优化</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练（一）最长递增子序列.html">算法200题训练（一）最长递增子序列</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/算法200题训练.html">算法200题训练</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Nsq源码学习笔记（一）----nsqd启动.html">Nsq源码学习笔记（一）----nsqd启动</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/奇怪的问题记录.html">奇怪的问题记录</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/Mac下使用dokcer搭建开发环境记录.html">Mac下使用dokcer搭建开发环境记录</a>
+          </li>
+          <li class="post-list-item">
+            <a class="post-list-link" href="/笔记博客开坑.html">笔记博客开坑</a>
+          </li>
+        </ul>
 
         <script>
 

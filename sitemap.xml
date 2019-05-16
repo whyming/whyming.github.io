@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.whyming.com/hystrix-go-introduction.html</loc>
+    
+    <lastmod>2019-05-16T05:48:49.926Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.whyming.com/404/index.html</loc>
+    
+    <lastmod>2019-05-16T02:51:03.509Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.whyming.com/ARTS-2.html</loc>
     
     <lastmod>2019-05-12T14:10:26.128Z</lastmod>

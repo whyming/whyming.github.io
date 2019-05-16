@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+  <meta name="keywords" content="go,golang,hystrix-go,源码,学习">
+
+  <meta name="description" content="golang,源码学习">
+  <meta name="keywords" content="go,golang,hystrix-go,源码,学习">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="hysteria-go 使用及源码学习">
+  <meta property="og:url" content="http://blog.whyming.com/hystrix-go-introduction.html">
+  <meta property="og:site_name" content="Whyming&#39;s Blog">
+  <meta property="og:description" content="golang,源码学习">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:updated_time" content="2019-05-16T05:48:49.926Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="hysteria-go 使用及源码学习">
+  <meta name="twitter:description" content="golang,源码学习">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Gemini',
+      version: '5.1.4',
+      sidebar: {
+        "position": "left",
+        "display": "always",
+        "offset": 12,
+        "b2t": false,
+        "scrollpercent": false,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical" href="http://blog.whyming.com/hystrix-go-introduction.html">
+
+  <title> Whyming's Blog | hysteria-go 使用及源码学习 go,golang,hystrix-go,源码,学习 golang,源码学习 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before">
+                  <i></i>
+                </span>
+                <span class="site-title">Whyming's Blog</span>
+                <span class="logo-line-after">
+                  <i></i>
+                </span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">坚持 积累 总结 升级</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i>
+                <br> 首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-archive"></i>
+                <br> 归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-commonweal">
+              <a href="/404/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-heartbeat"></i>
+                <br> 公益404
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i>
+                <br> 搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="algolia-popup popup search-popup">
+              <div class="algolia-search">
+                <div class="algolia-search-input-icon">
+                  <i class="fa fa-search"></i>
+                </div>
+                <div class="algolia-search-input" id="algolia-search-input"></div>
+              </div>
+
+              <div class="algolia-results">
+                <div id="algolia-stats"></div>
+                <div id="algolia-hits"></div>
+                <div id="algolia-pagination" class="algolia-pagination"></div>
+              </div>
+
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage" href="http://blog.whyming.com/hystrix-go-introduction.html">
+
+                  <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="whyming">
+                    <meta itemprop="description" content="">
+                    <meta itemprop="image" content="/uploads/images/avatar.png">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Whyming's Blog">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">hysteria-go 使用及源码学习</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-14T12:15:14+08:00">
+                          2019-05-14
+                        </time>
+
+                      </span>
+
+                      <span class="post-comments-count">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-comment-o"></i>
+                        </span>
+                        <a href="/hystrix-go-introduction.html#comments" itemprop="discussionUrl">
+                          <span class="post-comments-count gitment-comments-count" data-xid="/hystrix-go-introduction.html"
+                                                                                                          itemprop="commentsCount"></span>
+                        </a>
+                      </span>
+
+                      <div class="post-description">
+                        golang,源码学习
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+
+                    <p>hysteria-go 使用及源码学习，介绍hystrix-go的参数及意义，然后通过源码分析每个参数的实现方式</p>
+                    <a id="more"></a>
+                    <p>[TOC]</p>
+                    <h3 id="入口函数">
+                      <a href="#入口函数" class="headerlink" title="入口函数"></a>入口函数</h3>
+                    <p>hystrix主要入口有4个
+                      <code>Do</code> ,
+                      <code>Doc</code>,
+                      <code>Go</code>,
+                      <code>GoC</code>, 这几个从名字上，
+                      <code>Do</code>和
+                      <code>DoC</code> 是同步动作，
+                      <code>Go</code>和
+                      <code>GoC</code>是异步执行。</p>
+                    <p>
+                      <code>Do</code>和
+                      <code>DoC</code>的区别是，带
+                      <code>C</code>的 第一个参数是
+                      <code>context.Context</code>，而不带
+                      <code>C</code>的就是内部用
+                      <code>context.Background()</code>代替而已，其他地方没有任何区别。
+                      <code>Go</code>和
+                      <code>GoC</code>也是一样的。</p>
+                    <p>看下
+                      <code>Do</code>的代码就知道了</p>
+                    <figure class="highlight go">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Do</span><span class="params">(name <span class="keyword">string</span>, run runFunc, fallback fallbackFunc)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	runC := <span class="function"><span class="keyword">func</span><span class="params">(ctx context.Context)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">		<span class="keyword">return</span> run()</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> fallbackC fallbackFuncC</span><br><span class="line">	<span class="keyword">if</span> fallback != <span class="literal">nil</span> &#123;</span><br><span class="line">		fallbackC = <span class="function"><span class="keyword">func</span><span class="params">(ctx context.Context, err error)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">			<span class="keyword">return</span> fallback(err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> DoC(context.Background(), name, runC, fallbackC)</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>每个func参数都包装了一下，仅此而已</p>
+                    <p>然后在看下
+                      <code>Do</code>和
+                      <code>Go</code>的区别，一个是同步一个是异步。另外一个主要的区别就是两个函数的返回值类型，
+                      <code>Do</code>返回的是
+                      <code>error</code>，而Go返回的是
+                      <code>chan error</code>，看到chan 又看到go，应该可以想到goroutine。是的，
+                      <code>Go</code>内部就是创建一个routine，然后通过
+                      <code>chan error</code>通信实现的。</p>
+                    <p>前面提到
+                      <code>Go</code>是对
+                      <code>GoC</code>的包装，
+                      <code>Do</code>是对
+                      <code>Doc</code>的包装。除此之外
+                      <code>Doc</code>也是对
+                      <code>Goc</code>的包装，这样，所有接口都是
+                      <code>GoC</code>或者
+                      <code>GoC</code>的包装了。
+                      <code>Doc</code>是对
+                      <code>GoC</code>的包装，通过一小段代码就可以知道了。</p>
+                    <figure class="highlight go">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">select</span> &#123;</span><br><span class="line">	<span class="keyword">case</span> &lt;-done:</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	<span class="keyword">case</span> err := &lt;-errChan:</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>通过
+                      <code>select</code>阻塞直到抛出错误或者执行成功</p>
+                    <h3 id="配置参数">
+                      <a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h3>
+                    <p>配置参数主要有两个入口
+                      <code>Configure(cmds map[string]CommandConfig)</code> 和
+                      <code>ConfigureCommand(name string, config CommandConfig)</code>实际上，前者就是对后者的包装。</p>
+                    <figure class="highlight go">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Configure</span><span class="params">(cmds <span class="keyword">map</span>[<span class="keyword">string</span>]CommandConfig)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> k, v := <span class="keyword">range</span> cmds &#123;</span><br><span class="line">		ConfigureCommand(k, v)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>
+                      <code>ConmandConfig</code>支持5个参数，
+                      <code>Timeout</code>
+                    </p>
+                    <p>— 待续</p>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/golang/" rel="tag"># golang</a>
+
+                      <a href="/tags/go/" rel="tag"># go</a>
+
+                      <a href="/tags/hystrix-go/" rel="tag"># hystrix-go</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/ARTS-5.html" rel="next" title="ARTS-5">
+                          <i class="fa fa-chevron-left"></i> ARTS-5
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                      </div>
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+
+            <div id="gitment-container"></div>
+
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/uploads/images/avatar.png"
+                                                                                                  alt="whyming">
+
+                  <p class="site-author-name" itemprop="name">whyming</p>
+                  <p class="site-description motion-element" itemprop="description"></p>
+                </div>
+
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">17</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">标签</span>
+
+                  </div>
+
+                </nav>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-3">
+                      <a class="nav-link" href="#入口函数">
+                        <span class="nav-number">1.</span>
+                        <span class="nav-text">
+                          入口函数</span>
+                      </a>
+                    </li>
+                    <li class="nav-item nav-level-3">
+                      <a class="nav-link" href="#配置参数">
+                        <span class="nav-number">2.</span>
+                        <span class="nav-text">
+                          配置参数</span>
+                      </a>
+                    </li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy;
+          <span itemprop="copyrightYear">2019</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">whyming</span>
+
+        </div>
+
+        <div class="powered-by">由
+          <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow noopener noreferrer">Hexo</a> 强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash;
+          <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next"
+                                                                                          rel="external nofollow">NexT.Gemini</a> v5.1.4</div>
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+  <!-- LOCAL: You can save these files to your site and update links -->
+
+  <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+  <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+
+  <!-- END LOCAL -->
+
+  <script type="text/javascript">
+    function renderGitment() {
+      var gitment = new Gitmint({
+        id: window.location.pathname,
+        owner: 'whyming',
+        repo: 'blog-comment',
+        lang: "" || navigator.language || navigator.systemLanguage ||
+          navigator.userLanguage,
+        oauth: {
+          client_secret: '62fe7a80549594fc5dbcde6ef227f5d5a3df3fbe',
+          client_id: 'd743beecf5c419edcda4'
+        }
+      });
+      gitment.render('gitment-container');
+    }
+    renderGitment();
+
+  </script>
+
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+
+</html>
